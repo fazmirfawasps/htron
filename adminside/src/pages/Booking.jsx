@@ -1,0 +1,73 @@
+import React, { useEffect, useState, } from 'react';
+import Tablecomponent from '../parts/Table';
+import api from '../axios/axios';
+import BtnComponent from '../components/Btncomponent';
+import swal from 'sweetalert';
+import { Box ,Typography} from '@mui/material';
+
+
+const Booking = () => {
+    const [Order, setOrder] = useState([])
+    const [change, setChange] = useState(false)
+    // const style1 = {
+    //     bgcolor: 'green',
+    // }
+
+    const style = {
+        bgcolor: 'red',
+    }
+    function Cancel(orderid) {
+        console.log(orderid);
+        swal({
+            title: 'Are you sure?',
+            text: 'This action cannot be undone!',
+            icon: 'warning',
+            buttons: ['Cancel', 'Delete'],
+            dangerMode: true,
+        })
+            .then((willDelete) => {
+
+                if (willDelete) {
+                    console.log('working');
+                    api.patch(`/admin/Cancelbooking/${orderid}`).then(() => {
+                        setChange(!change)
+                    })
+
+                }
+            }).catch((err) => {
+                console.log(err);
+            })
+
+
+    }
+    useEffect(() => {
+        console.log();
+        api.get('/admin/getallorder').then(({ data }) => {
+            const datas = data.map((item) => ({
+                ...item,
+                Image: <img src={`http://localhost:7000/images/${item.Image}`} style={{ width: '50px' }}></img>,
+                Action: item.OrderStatus === "Booking Cancelled" ? "" : <BtnComponent
+                    variant={'contained'}
+                    callback={() => {
+                        Cancel(item._id)
+                    }}
+                    content={'Canel'}
+                    style={style}
+                />
+
+            }))
+
+            setOrder(datas)
+        })
+    }, [change])
+
+    return (
+        <Box>
+            <Typography variant="h4" textAlign={"center"} m={2}>
+                BOOKINGS
+            </Typography>
+            <Tablecomponent Data={Order} ></Tablecomponent>
+        </Box>
+    );
+};
+export default Booking;
