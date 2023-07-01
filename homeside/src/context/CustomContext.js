@@ -3,7 +3,7 @@ export const ExternalContext = createContext()
 
 function CustomContext({ children }) {
     const [isfilled, setIsfilled] = useState(false) //to know the status and change from login to otp
-    const [open, setOpen] = useState(false) //to open and close modal
+    const [show, setShow] = useState(false) //to open and close modal
     const [openLogin, setOpenlogin] = useState(false) //to open the modal onclick login button
     const [alert, setAlert] = useState({
         notify: false,
@@ -23,8 +23,8 @@ function CustomContext({ children }) {
             value={{
                 isfilled,
                 setIsfilled,
-                open,
-                setOpen,
+                show,
+                setShow,
                 alert,
                 setAlert,
                 openLogin,

@@ -1,14 +1,16 @@
-import React, { useState } from 'react';
-import Button from 'react-bootstrap/Button';
+import React, { useState ,useContext} from 'react';
 import Modal from 'react-bootstrap/Modal';
 import { ShowLoginPart } from './ShowLoginPart';
 import {  Typography,} from '@mui/material'
 import 'bootstrap/dist/css/bootstrap.min.css'; 
+import { ExternalContext } from '../../context/CustomContext';
+
 
 
 export default function ModalPage({Key,Changekey}) {
     console.log(Key);
-    const [show, setShow] = useState(false);
+    const {show, setShow}=  useContext(ExternalContext)
+
 
     const handleClose = () =>{setShow(false) 
         console.log('workinh');
@@ -19,7 +21,6 @@ export default function ModalPage({Key,Changekey}) {
     const ChangeEmail = (emil)=>{
     setEmail(emil)
     }
-    const Heading =['Login or Signup','UserDetails','otpVerifaction','Mobno']
 
     return (
         <>
