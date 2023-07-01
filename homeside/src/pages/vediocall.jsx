@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 // import { loadStripe } from '@stripe/stripe-js';
 import api from '../axios/axios';
 
 // const stripePromise = loadStripe('pk_test_51NHbVVSFTJEFvJs0k2t1FYlSAvP28nhiNlU3wP8HR6EyGr1FXNJvjPjWSHaHP77fMR2U7c7AuDoK7H04TD6nqaQo00DJK3p8gX');
 
 const StripeCheckout = () => {
-  const [sessionId, setSessionId] = useState('');
+  // const [sessionId, setSessionId] = useState('');
 
   const handleCheckout = async () => {
     try {

@@ -1,4 +1,4 @@
-import React, { useRef } from 'react'
+import React from 'react'
 import { Player } from '@lottiefiles/react-lottie-player'
 import { Box } from '@mui/material'
 function Loading() {

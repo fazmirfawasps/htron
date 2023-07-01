@@ -1,7 +1,7 @@
 import React from 'react'
 import AirbnbSlider, { AirbnbThumbComponent } from './Style'
 import { Typography, Card, Stack, TextField, Box } from '@mui/material'
-import { useMediaQuery } from '@mui/material'
+// import { useMediaQuery } from '@mui/material'
 import PropTypes from 'prop-types';
 function FilterBar({
     propertType,
@@ -12,7 +12,7 @@ function FilterBar({
     MAXIMUM,
     MINIMUM,
 }) {
-    const matches = useMediaQuery('(max-width:600px)')
+    // const matches = useMediaQuery('(max-width:600px)')
     return (
         <Box >
             <Card

@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react'
 import Profile from '../layout/Profile'
 import { useSelector } from 'react-redux'
 import { getUserDetail } from '../api/apicall'
-import { set } from 'react-hook-form'
 function ProfilePage() {
     const [username, setuser] = useState('')
     const [phonenumber, setpon] = useState('')
@@ -27,7 +26,7 @@ function ProfilePage() {
         })
     }, [change])
     const address = 'palatskdsndk'
-    const [wallet, setWallet] = useState(0)
+    // const [wallet, setWallet] = useState(0)
     // useEffect(() => {
     //     getWalletAmt(_id)
     //         .then(({ data }) => {
@@ -45,7 +44,7 @@ function ProfilePage() {
             phoneNumber={phonenumber}
             email={email}
             Address={address}
-            wallet={wallet}
+            // wallet={wallet}
             callBack={Changeeffect}
         />
     )

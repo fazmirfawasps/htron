@@ -9,7 +9,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 
-export default function Basic({ name, phoneNumber, email, wallet,callBack }) {
+export default function Basic({ name, phoneNumber, email,callBack }) {
     const ProfileField = styled(TextField)(({ theme }) => ({
         margin: theme.spacing(1),
     }))
@@ -20,14 +20,14 @@ export default function Basic({ name, phoneNumber, email, wallet,callBack }) {
     // const [Name, setName] = useState(name)
     // const [Email, setEmail] = useState(email)
     console.log(name);
-    const [mob, setmob] = useState(phoneNumber)
+    // const [mob, setmob] = useState(phoneNumber)
     const {
         handleSubmit,
         control,
         formState: { errors },
-        setError,
+        // setError,
     } = useForm()
-    console.log(mob);
+    // console.log(mob);
     function change() {
         setEdit(!edit)
     }
