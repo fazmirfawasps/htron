@@ -31,4 +31,4 @@ jobs:
           REMOTE_HOST: ${{ secrets.HOST }}
           REMOTE_USER: ${{ secrets.USERNAME }}
           TARGET: "/home/ubuntu/homeside"
-          EXCLUDE: "/dist/, /node_modules/
+          EXCLUDE: "/dist/, /node_modules/"
