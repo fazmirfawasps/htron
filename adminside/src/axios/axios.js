@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const api = axios.create({
-  baseURL: 'http://htron.site/api',
+  baseURL: '/api',
   headers: {
     'Content-Type': 'application/json',
   },

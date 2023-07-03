@@ -61,7 +61,7 @@ app.use(
 
 
 
-app.use('/api', indexRouter);
+app.use('/', indexRouter);
 app.use('/api/admin', adminRouter);
 app.use('/api/host',hostRouter)
 
