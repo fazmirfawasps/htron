@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunkhomeside=self.webpackChunkhomeside||[]).push([[24],{4024:function(e,s,t){t.r(s);t(2791);var n=t(8062),i=t(4554),r=t(890),c=t(3329);s.default=function(){return(0,c.jsxs)(i.Z,{mt:15,children:[(0,c.jsx)(n.J5,{autoplay:!0,controls:!0,src:"https://assets10.lottiefiles.com/packages/lf20_yw3nyrsv.json",style:{height:"300px",width:"300px"},direction:1e3,keepLastFrame:!0}),(0,c.jsx)(r.Z,{variant:"h2",textAlign:"center",color:"red",children:"Booking Cancelled"})]})}}}]);
+//# sourceMappingURL=24.356a6196.chunk.js.map
