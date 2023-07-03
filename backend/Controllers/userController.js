@@ -221,8 +221,8 @@ exports.createCheckoutSession = async (req, res) => {
                 checkOut,
             },
             mode: 'payment',
-            success_url: 'http://localhost:3000/success',
-            cancel_url: 'http://localhost:3000/cancel',
+            success_url: 'http://htron.site/success',
+            cancel_url: 'http://htron.site/cancel',
         });
         console.log(session.url);
         const sessionData = req.session;
