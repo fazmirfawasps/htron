@@ -53,7 +53,7 @@ app.use(
 );
 app.use(
   cors({
-    origin: ["http://localhost:3000", "http://localhost:3001"],
+    origin: ["http://htron.site", "http://admin.htron.site"],
     credentials: true,
   })
 );
@@ -61,9 +61,9 @@ app.use(
 
 
 
-app.use('/', indexRouter);
-app.use('/admin', adminRouter);
-app.use('/host',hostRouter)
+app.use('/api', indexRouter);
+app.use('/api/admin', adminRouter);
+app.use('/api/host',hostRouter)
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
