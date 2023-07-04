@@ -40,13 +40,13 @@ export default function SignIn() {
   const dispatch = useDispatch()
   const admin = useSelector(state => state.admin)
   console.log(admin);
-  useEffect(() => {
-    // Call the `navigate` function to navigate to a different page
-    if (admin.loggedIn) {
-      navigate('/');
+  // useEffect(() => {
+  //   // Call the `navigate` function to navigate to a different page
+  //   if (admin.loggedIn) {
+  //     navigate('/');
 
-    }
-  }, [navigate, admin])
+  //   }
+  // }, [navigate, admin])
 
   const { email, isValid, handleChange } = useEmailValidation('');
   const [error, setError] = React.useState('')

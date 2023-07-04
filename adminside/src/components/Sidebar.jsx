@@ -127,13 +127,13 @@ export default function MiniDrawer() {
 
   const dispatch = useDispatch()
 
-  React.useEffect(() => {
-    // Call the `navigate` function to navigate to a different page
-    if (!admin.loggedIn) {
-      navigate('/login');
+  // React.useEffect(() => {
+  //   // Call the `navigate` function to navigate to a different page
+  //   if (!admin.loggedIn) {
+  //     navigate('/login');
 
-    }
-  }, [navigate, admin]);
+  //   }
+  // }, [navigate, admin]);
 
   const menuItem = [
     {
