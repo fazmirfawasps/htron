@@ -50,7 +50,7 @@ router.post('/getHostedproperty',(req,res)=>{
     HostHelper.GethostProperty(req.body).then((response)=>{
         const updatedResponse = response.map(item => {
             const updatedImageFilenames = item.imageFilenames.map(filename => {
-              return `${req.protocol}://${req.hostname}:${req.socket.localPort}/images/${filename}`;
+              return `http/images/${filename}`;
             });
             return { ...item, imageFilenames: updatedImageFilenames };
           });
