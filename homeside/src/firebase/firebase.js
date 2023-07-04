@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 // import { getAnalytics } from "firebase/analytics";
@@ -6,14 +7,16 @@ import { initializeApp } from "firebase/app";
 import { getAuth, GoogleAuthProvider, PhoneAuthProvider } from 'firebase/auth'
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+
+console.log(process.env.REACT_APP_API_KEY);
 const firebaseConfig = {
-  apiKey: "AIzaSyArPKKxuAfJ7rQlKkFH1or0lt2s8em67cA",
-  authDomain: "heavyvehicle-872d8.firebaseapp.com",
-  projectId: "heavyvehicle-872d8",
-  storageBucket: "heavyvehicle-872d8.appspot.com",
-  messagingSenderId: "44177873512",
-  appId: "1:44177873512:web:10ed32a0594a184e1039dd",
-  measurementId: "G-EMYQ9EFL23"
+  apiKey: process.env.REACT_APP_API_KEY,
+  authDomain: process.env.REACT_APP_AUTH_DOMAIN,
+  projectId: process.env.REACT_APP_PROJECT_ID,
+  storageBucket: process.env.REACT_APP_STORAGE_BUCKET,
+  messagingSenderId:process.env.REACT_APP_MESSAGING_SENDER_ID,
+  appId: process.env.REACT_APP_APP_ID,
+  measurementId:  process.env.REACT_APP_MEASUREMENT_ID
 };
 
 // Initialize Firebase

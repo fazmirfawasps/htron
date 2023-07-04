@@ -31,7 +31,7 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
+app.use('/api',express.static(path.join(__dirname, 'public')));
 db.connectToMongo((err) => {
   if (err) {
     console.log('Failed to connect to database', err);
@@ -53,7 +53,7 @@ app.use(
 );
 app.use(
   cors({
-    origin: ["http://htron.site", "http://admin.htron.site"],
+    origin: ["http://htron.site", "http://admin.htron.site","http://localhost:3000", "http://localhost:3001",'admin.htron.site'],
     credentials: true,
   })
 );
@@ -61,7 +61,7 @@ app.use(
 
 
 
-app.use('/', indexRouter);
+app.use('/api', indexRouter);
 app.use('/api/admin', adminRouter);
 app.use('/api/host',hostRouter)
 

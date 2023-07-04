@@ -4,10 +4,10 @@ import { Box, Grid, Card, Typography } from "@mui/material";
 import GraphChart from '../components/GraphChart';
 import BarChart from '../components/BarChart';
 import api from '../axios/axios';
-import { useMediaQuery } from '@mui/material';
+// import { useMediaQuery } from '@mui/material';
 const Dashboard = () => {
   const [dashBoard, setDashBoard] = useState([]);
-  const isMobile = useMediaQuery('(max-width: 600px)');
+  // const isMobile = useMediaQuery('(max-width: 600px)');
   useEffect(() => {
     api.get('/admin/dashboard').then(({ data }) => {
       console.log(data);
@@ -21,17 +21,21 @@ const Dashboard = () => {
     totalAmount,
     totalBookingPerDay,
     totalNumberOfProperty, } = dashBoard
+    console.log(totalBookingPerDay);
 
   const totalBooking = {
-    labels: totalBookingPerDay && Array.isArray(totalBookingPerDay) ? totalBookingPerDay.map((item) => item._id) : [0,0,0],
+    labels: totalBookingPerDay && Array.isArray(totalBookingPerDay) ? totalBookingPerDay.map((item) => item._id) : ['q','q','3'],
     datasets: [
       {
         label: "BookingsPerDay",
-        data: totalBookingPerDay && Array.isArray(totalBookingPerDay) ? totalBookingPerDay.map((item) => item.total) : [0,0,],
+        data: totalBookingPerDay && Array.isArray(totalBookingPerDay) ? totalBookingPerDay.map((item) => item.total) : [0,0,0],
         backgroundColor: ["#404040"],
       },
     ],
   };
+  console.log(totalBooking);
+
+
 
   return (
     <Box>
@@ -110,14 +114,14 @@ const Dashboard = () => {
         </Grid>
         <Box width='auto' height={250} />
         <Grid item xs={12} lg={6}>
-          <Box width={isMobile ? 300 : 500} p={1}>
+          <Box  p={1}>
             <BarChart
               chartData={totalBooking}
             />
           </Box>
         </Grid>
         <Grid item xs={12}  lg={6}>
-          <Box width={isMobile ? 300 : 500} p={1}>
+          <Box  p={1}>
             <GraphChart
               chartData={totalBooking}
             />
