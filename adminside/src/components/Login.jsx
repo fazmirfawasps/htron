@@ -17,7 +17,7 @@ import api from '../axios/axios';
 import useEmailValidation from '../customHooks/emailHook';
 import {  setLoggedIn } from '../redux/redux';
 import { useDispatch, useSelector } from 'react-redux'
-import { useEffect } from 'react';
+// import { useEffect } from 'react';
 import Card from '@mui/material/Card';
 
 // function Copyright(props) {
