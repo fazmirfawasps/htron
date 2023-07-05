@@ -26,6 +26,7 @@ export function ProCard(
         wishlist
     }) {
     const matches = useMediaQuery('(min-width:600px)')
+    
 
     return (
         <Grid item xs={12} sm={6} md={size} lg={size}>
