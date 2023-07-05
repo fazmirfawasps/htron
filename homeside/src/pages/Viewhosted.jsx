@@ -63,7 +63,6 @@ export default function Viewhosted() {
     // const { setPropertyEdit } = useContext(ExternalContext)
     function editProperty(id) {
         let PropertyToedit = hostedProperty?.find((item) => item._id == id)
-        console.log('NAJAN AANE');
         console.log(PropertyToedit);
         // for (var i = 0; i < PropertyToedit.length; i++) {
         //     PropertyToedit[i].vehicleType = PropertyToedit[i].VehicleType;
@@ -95,7 +94,7 @@ export default function Viewhosted() {
         <Box mt={10}>
             <Container maxWidth="xl" sx={{ width: '94%' }}>
                 <Typography variant="h4" color={'#955251'} fontWeight={600}>
-                    Listed Property
+                    Listed Vehicle
                 </Typography>
                 <HostPropertyCard
                     editProperty={editProperty}

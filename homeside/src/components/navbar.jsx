@@ -105,10 +105,7 @@ function ResponsiveAppBar() {
 
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
-  useEffect(() => {
-    api.get('/')
-  }, [])
-
+ 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
   };
