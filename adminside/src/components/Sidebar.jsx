@@ -326,7 +326,7 @@ export default function MiniDrawer() {
       </Drawer>
       <Box component="main" sx={{ flexGrow: 1, p: 3, overflowX: 'hidden' }}>
         <DrawerHeader />
-        <Outlet></Outlet>
+      {admin.loggedIn?<Outlet></Outlet>:''}  
       </Box>
     </Box>
   );
