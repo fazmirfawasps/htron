@@ -68,7 +68,7 @@ function ProductCard({
                                         onClick={() => {
                                             callback(item._id)
                                         }}
-                                        src={`http://localhost:7000/images/${img}`}
+                                        src={`http://htron.site/api/images/${img}`}
                                     />
                                 ))}
                             </Swipeble>

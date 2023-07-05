@@ -89,6 +89,8 @@ function ResponsiveAppBar() {
 
   const logout = () => {
     dispatch(setLogout())
+    localStorage.removeItem('userAccessToken');
+    localStorage.removeItem('userRefreshToken');
     toast.success('Logout succuesfully.', { autoClose: 2000 })
   }
   console.log(auth);
