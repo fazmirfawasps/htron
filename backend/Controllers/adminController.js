@@ -63,7 +63,7 @@ const adminController = {
     addCategory(req, res, next) {
         console.log(req.body);
         console.log(req.file);
-        const image = `${req.protocol}://${req.hostname}:${req.socket.localPort}/images/${req.file.filename}`;
+        const image = `https://htron.site/api/images//images/${req.file.filename}`;
         console.log('addcategory');
         adminHelpers.addCategory(req.body.name, image)
             .then((response) => {
@@ -128,7 +128,7 @@ const adminController = {
             data.Category = req.body.oldname
         }
         if(req.file){
-          data.image =  `${req.protocol}://${req.hostname}:${req.socket.localPort}/images/${req.file.filename}`
+          data.image =  `https://htron.site/api/images/${req.file.filename}`
         }
         else{
           data.image=req.body.old
