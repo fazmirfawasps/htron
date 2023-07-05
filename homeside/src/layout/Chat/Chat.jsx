@@ -29,7 +29,7 @@ function Chat() {
   const userid = useSelector((state) => state.user.id)
 
   useEffect(() => {
-    socket.current = io('https://htron.site/api' , { path: '/api/socket.io/'})
+    socket.current = io('/api' , { path: '/api/socket.io/'})
   }, [])
 
   useEffect(() => {
