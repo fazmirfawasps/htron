@@ -4,7 +4,7 @@ const { adduser, user, getReceiver, RemoveUser } = require("./EmitterChat");
 module.exports = function(server) {
   const io = socketIO(server, {
     cors: {
-      origin: 'http://localhost:3000',
+      origin: 'https://htron.site',
       methods: ['GET', 'POST'],
     },
   });
