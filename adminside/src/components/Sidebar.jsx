@@ -127,13 +127,13 @@ export default function MiniDrawer() {
 
   const dispatch = useDispatch()
 
-  // React.useEffect(() => {
-  //   // Call the `navigate` function to navigate to a different page
-  //   if (!admin.loggedIn) {
-  //     navigate('/login');
+  React.useEffect(() => {
+    // Call the `navigate` function to navigate to a different page
+    if (!admin.loggedIn) {
+      navigate('/login');
 
-  //   }
-  // }, [navigate, admin]);
+    }
+  }, [navigate, admin]);
 
   const menuItem = [
     {
@@ -326,7 +326,7 @@ export default function MiniDrawer() {
       </Drawer>
       <Box component="main" sx={{ flexGrow: 1, p: 3, overflowX: 'hidden' }}>
         <DrawerHeader />
-      {admin.loggedIn?<Outlet></Outlet>:navigate('/login')}  
+        <Outlet></Outlet>
       </Box>
     </Box>
   );
