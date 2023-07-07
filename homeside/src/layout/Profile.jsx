@@ -7,12 +7,14 @@ import { useSelector } from 'react-redux';
 import swal from 'sweetalert';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
+import useMediaQuery from '@mui/material/useMediaQuery'
 
 export default function Basic({ name, phoneNumber, email,callBack }) {
     const ProfileField = styled(TextField)(({ theme }) => ({
         margin: theme.spacing(1),
     }))
+    const matches = useMediaQuery('(min-width:600px)')
+
     const userId = useSelector((state) => state.user.id)
 
 
@@ -69,7 +71,7 @@ export default function Basic({ name, phoneNumber, email,callBack }) {
                                         <Box flexShrink={0}>
                                             <CardMedia
                                                 component="img"
-                                                style={{ width: '180px', borderRadius: '10px' }}
+                                                style={{ width: matches? '180px':'100px', borderRadius: '10px' }}
                                                 src='https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-profiles/avatar-1.webp'
                                                 alt='Generic placeholder image'
                                             />
@@ -97,7 +99,7 @@ export default function Basic({ name, phoneNumber, email,callBack }) {
                                                     </Box>
                                                 </Box>
                                                 {edit ? (
-                                                    <Box display='flex' flexDirection='row' >
+                                                    <Box display='flex' flexDirection='column' >
                                                         <Box display="flex" flexDirection='column'>
                                                             <Controller
                                                                 name="name"
