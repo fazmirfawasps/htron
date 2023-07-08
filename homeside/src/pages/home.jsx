@@ -70,7 +70,7 @@ export default function Home() {
       .finally(() => {
         setLoading(false);
       });
-  }, [userId]);
+  }, [userId,change]);
 
   useEffect(() => {
     api
