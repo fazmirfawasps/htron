@@ -73,6 +73,7 @@ export default function Home() {
   }, [userId,change]);
 
   useEffect(() => {
+    if(userId){
     api
       .get(`/getauserdetail/${userId}`)
       .then(({ data }) => {
@@ -80,7 +81,8 @@ export default function Home() {
         dispatch(setHostapplied(data[0].Hostapplied));
         dispatch(setVerified(data[0].Verified));
       })
-      .catch(() => {});
+      .catch(() => {})
+    }
   }, [userId]);
 
   function navigateToSinglePage(id) {
