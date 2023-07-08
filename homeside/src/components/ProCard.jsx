@@ -44,25 +44,37 @@ export function ProCard(
                         bgcolor: 'transparent',
                     }}
                 >
-                  {wishlist &&
-                        (property?.wishlist ? (
+                  {wishlist && (
+                        <Box
+                            component="div"
+                            sx={{
+                                display: 'inline-block',
+                                transition: 'transform 0.3s',
+                                position: 'absolute', // Position the FavoriteIcon box absolutely inside the parent Box
+                                top: '10px', // Adjust the top position as needed
+                                right: '10px', // Adjust the right position as needed
+                                zIndex: 1,
+                                
+                                '&:hover': {
+                                    transform: 'scale(1.2)',
+                                    cursor: 'pointer'
+                                }
+                            }}
+                            onClick={() => {
+                                if (property?.wishlist) {
+                                    removeFromWishlist(property._id);
+                                } else {
+                                    addtowishlist(property);
+                                }
+                            }}
+                        >
                             <FavoriteIcon
-                                sx={{ color: '#d4213f'}}
-                                onClick={() => {
-                                    removeFromWishlist(property._id)
+                                sx={{
+                                    color: property?.wishlist ? '#d4213f' : 'grey'
                                 }}
                             />
-                        ) : (
-                            <FavoriteIcon 
-                            sx={{ color: 'grey' }}
-
-                                onClick={() => {
-                                    addtowishlist(property)
-                                }}
-                            />
-                        ))} 
-                   
-                    
+                        </Box>
+                    )}
 
                     <Swipeble>
                         {property['imageFilenames']?.map((img, index) => (
