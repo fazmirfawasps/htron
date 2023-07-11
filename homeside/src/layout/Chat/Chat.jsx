@@ -9,12 +9,16 @@ import {
   Button,
   Stack,
   Typography,
+  Avatar
 } from '@mui/material'
 import SendIcon from '@mui/icons-material/Send'
 import { useSelector } from 'react-redux'
 import { getconversation, getMessages, postMessage } from '../../api/apicall';
 import Message from './Message';
 import ChatUser from './Chatuser';
+import useMediaQuery from '@mui/material/useMediaQuery'
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import swal from 'sweetalert';
 
 function Chat() {
 
@@ -27,12 +31,21 @@ function Chat() {
   const socket = useRef()
   const chatRef = useRef()
   const userid = useSelector((state) => state.user.id)
+  const matches = useMediaQuery('(min-width:600px)')
+  const [show, setShow] = useState(true)
+  const [notification, setNotification] = useState([{
+    senderid: '123',
+    text: 'hello',
+    createdAt: Date.now(),
+  }])
 
   useEffect(() => {
     socket.current = io('https://htron.site' , { path: '/api/socket.io/'})
+
   }, [])
 
   useEffect(() => {
+
     arrivalMessage &&
       checkcurrentChat(arrivalMessage.senderid) &&
       setMessages((prev) => [...prev, arrivalMessage])
@@ -44,6 +57,11 @@ function Chat() {
     })
   }, [userid])
   useEffect(() => {
+    if (arrivalMessage) {
+      setNotification((prev) => [...prev, arrivalMessage])
+    }
+  }, [arrivalMessage])
+  useEffect(() => {
     socket.current.on('getMessage', (data) => {
       console.log(data)
       setArrivalMessage({
@@ -53,12 +71,29 @@ function Chat() {
       })
     })
   }, [])
+  console.log(notification);
+  const groupObjectsById = (arr) => {
+    return arr.reduce((groupedObjects, obj) => {
+      const id = obj.senderid;
+      if (groupedObjects[id]) {
+        groupedObjects[id].count++;
+      } else {
+        groupedObjects[id] = {
+          objects: [obj],
+          count: 1
+        };
+      }
+      return groupedObjects;
+    }, {});
+  };
+
+  const groupedById = groupObjectsById(notification);
+  console.log(groupedById);
   useEffect(() => {
     if (chatRef.current) {
       chatRef.current.scrollIntoView({ behavior: 'smooth' })
     }
   }, [messages])
-
   useEffect(() => {
     const getchatuser = async () => {
       try {
@@ -135,19 +170,64 @@ function Chat() {
   }
 
 
+  useEffect(() => {
+    socket.current.on('blockuser', () => {
+      console.log('bocking user working in back end');
+      swal({
+        title: 'Are you sure?',
+        text: 'This action cannot be undone!',
+        icon: 'warning',
+        button: 'OK',
+        dangerMode: true,
+      }).then(() => {
+        // User clicked the "OK" button
+        // Perform your desired action here
+      });
+    })
+  }, [])
 
 
-  return (
-    <Container
+  function stringToColor(string) {
+    let hash = 0
+    let i
+
+    /* eslint-disable no-bitwise */
+    for (i = 0; i < string.length; i += 1) {
+      hash = string.charCodeAt(i) + ((hash << 5) - hash)
+    }
+
+    let color = '#'
+
+    for (i = 0; i < 3; i += 1) {
+      const value = (hash >> (i * 8)) & 0xff
+      const brightValue = (value + 128) % 256;
+      color += `00${brightValue.toString(16)}`.slice(-2)
+    }
+    /* eslint-enable no-bitwise */
+
+    return color
+  }
+
+  function stringAvatar(name) {
+    return {
+      sx: {
+        bgcolor: stringToColor(name),
+      },
+      children: `${name.split('')[0][0]}${name.split('')[1][0]}`,
+    }
+  }
+
+  return (<>
+    {matches ? <Container
       maxWidth="xl"
       sx={{
         width: '95%',
         overflow: 'hidden',
         overflowX: 'hidden',
-        overflowY: 'auto',
+        overflowY: 'hidden',
 
-        marginTop: '100px',
-        height: '600px',
+        paddingTop: '100px',
+        height: '100%',
 
 
       }}
@@ -162,7 +242,7 @@ function Chat() {
         }}
       >
         <Grid container>
-          <Grid item xs={12} sm={12} lg={4}>
+          <Grid item xs={12} sm={6} md={4} lg={4}>
             <Box
               sx={{
                 width: '100%',
@@ -205,7 +285,7 @@ function Chat() {
                 : null}
             </Box>
           </Grid>
-          <Grid item xs={12} sm={12} lg={8}>
+          <Grid item xs={12} sm={6} md={8} lg={8}>
             {currentchat ? (
               <>
                 <Box
@@ -230,6 +310,7 @@ function Chat() {
                     },
                   }}
                 >
+
                   {messages.map((item, index) => (
                     <div
                       ref={chatRef}
@@ -279,7 +360,191 @@ function Chat() {
           </Grid>
         </Grid>
       </Card>
-    </Container>
+    </Container> : <Box
+      maxWidth="xl"
+      sx={{
+        width: '100%',
+        overflow: 'hidden',
+        overflowY: 'auto',
+
+        paddingTop: '30px',
+        height: '100%',
+
+
+      }}
+    >
+      <Card
+        sx={{
+          bgcolor: '#EEEEEE',
+          width: '100%',
+          mt: 4,
+          height: 'auto',
+          boxShadow: 5,
+        }}
+      >
+        <Grid  Container>
+          {show ? <Grid item xs={12} sm={12} lg={4}>
+            <Box
+              sx={{
+                width: '100%',
+                height: '100%',
+                overflowX: 'hidden',
+                overflowY: 'auto',
+                padding: 1,
+                scrollbarWidth: 'thin',
+                bgcolor: 'white',
+                '&::-webkit-scrollbar': {
+                  width: '10px',
+                },
+                '&::-webkit-scrollbar-thumb': {
+                  background: 'gray',
+                  borderRadius: '10px',
+                },
+                '&::-webkit-scrollbar-thumb:hover': {
+                  background: 'darkgray',
+                },
+              }}
+            >
+              {chatData
+                ? chatData.map((item, index) => (
+                  <Box
+                    component={'div'}
+                    onClick={() => {
+                      setCurrentChat(
+                        item.conversationid
+                      )
+                      setReceiver(item)
+                      setShow(false)
+
+                    }}
+                    key={index}
+                  >
+                    <ChatUser
+                      data={item}
+                      currentchat={currentchat}
+                    />
+                  </Box>
+                ))
+                : null}
+            </Box>
+          </Grid> : <Grid item xs={12} sm={12} lg={12}>
+            {currentchat ? (
+              <><Box sx={{
+                heigth: '60px',
+                width: '100%',
+                bgcolor: '#f5f5f5',
+                display: 'flex'
+              }}>
+                <Box
+                  sx={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    width: '36px',
+                    height: '56px',
+                   
+                  }}
+                  onClick={() => setShow(true)}>
+                  <ArrowBackIcon />
+                </Box>
+                <Box   sx={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                   
+                   
+                  }}>
+                  <Avatar {...stringAvatar(receiver.receiverName)} />
+                </Box>
+                <Box   sx={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                   
+                   
+                  }}>
+                  <Typography p={1} color={'#3b71ca'} fontWeight={600} variant="inherit">
+                    {receiver.receiverName}
+                  </Typography>
+                </Box>
+              </Box>
+                <Box
+                  sx={{
+                    height: '70vh',
+                    width: '100%',
+                    bgcolor: '#ffff',
+                    overflowX: 'hidden',
+                    padding: 5,
+                    overflowY: 'auto',
+                    scrollbarWidth: 'thin',
+                    scrollBehavior: 'smooth',
+                    '&::-webkit-scrollbar': {
+                      width: '10px',
+                    },
+                    '&::-webkit-scrollbar-thumb': {
+                      background: 'gray',
+                      borderRadius: '10px',
+                    },
+                    '&::-webkit-scrollbar-thumb:hover': {
+                      background: 'darkgray',
+                    },
+                  }}
+                >
+
+                  {messages.map((item, index) => (
+                    <div
+                      ref={chatRef}
+                      id="scroll"
+                      key={index}
+                    >
+                      <Message
+                        data={item}
+                        userid={userid}
+                        receiver={receiver}
+                      // user={user}
+                      />
+                    </div>
+                  ))}
+                </Box>
+                <Stack direction={'row'}>
+                  <TextField
+                    id="outlined-multiline-flexible"
+                    multiline
+                    maxRows={4}
+                    fullWidth
+                    size="small"
+                    value={NewMessage}
+                    onChange={handlefield}
+                  />
+                  <Button
+                    disabled={!NewMessage}
+                    variant="contained"
+                    sx={{ bgcolor: '#3b71ca' }}
+                    endIcon={<SendIcon />}
+                    onClick={handlesubmit}
+                  ></Button>
+                </Stack>
+              </>
+            ) : (
+              <Box
+                height={'60vh'}
+                textAlign={'center'}
+                pt={'30vh'}
+                width={'100%'}
+              >
+                <Typography variant="h4" color={'#D3D3D3'}>
+                  start a chat now
+                </Typography>
+              </Box>
+            )}
+          </Grid>}
+
+
+        </Grid>
+      </Card>
+    </Box>}
+
+  </>
   )
 }
 
