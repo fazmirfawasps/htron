@@ -131,7 +131,7 @@ exports.getAllProperty = (req, res, next) => {
         .then((response) => {
             const updatedResponse = response.map((item) => {
                 const updatedImageFilenames = item.imageFilenames.map((filename) => {
-                    return `${req.protocol}://${req.hostname}:$/images/${filename}`;
+                    return `https://htron.site/api/images/${filename}`;
                 });
                 return { ...item, imageFilenames: updatedImageFilenames };
             });

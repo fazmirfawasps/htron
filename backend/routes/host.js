@@ -50,7 +50,7 @@ router.post('/getHostedproperty',(req,res)=>{
     HostHelper.GethostProperty(req.body).then((response)=>{
         const updatedResponse = response.map(item => {
             const updatedImageFilenames = item.imageFilenames.map(filename => {
-              return `http/images/${filename}`;
+              return `https://htron.site/api/images/${filename}`;
             });
             return { ...item, imageFilenames: updatedImageFilenames };
           });
@@ -78,7 +78,7 @@ router.post('/EditHostedproperty',upload.array('images'),(req,res)=>{
   if(!req.files.length ==0){
   const matchedElements = req.body.oldimages.filter(element => req.body.images.includes(element));
   console.log(matchedElements);
-  const modifiedUrls = matchedElements.map(url => url.substring("http://localhost:7000/images/".length));
+  const modifiedUrls = matchedElements.map(url => url.substring("https:/htron.site/api/images/".length));
   console.log(modifiedUrls);
   req.files.map(file => {
     const modifiedFilename = file.filename

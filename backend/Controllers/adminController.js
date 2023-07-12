@@ -63,7 +63,7 @@ const adminController = {
     addCategory(req, res, next) {
         console.log(req.body);
         console.log(req.file);
-        const image = `https://htron.site/api/images//images/${req.file.filename}`;
+        const image = `https://htron.site/api/images/${req.file.filename}`;
         console.log('addcategory');
         adminHelpers.addCategory(req.body.name, image)
             .then((response) => {
@@ -210,7 +210,7 @@ const adminController = {
         adminHelpers.GetAhostDetail(req.body)
             .then((property) => {
                 console.log(property);
-                property[0].image = `${req.protocol}://${req.hostname}:${req.socket.localPort}/images/${property[0].image}`;
+                property[0].image = `https://htron.site/api/images/${property[0].image}`;
                 console.log(property);
 
                 res.json(property);
