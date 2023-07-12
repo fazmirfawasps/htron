@@ -5,7 +5,7 @@ module.exports = function(server) {
   const io = socketIO(server,{
     path: "/api/socket.io/",
     cors: {
-      origin: ["https://htron.site",'http://localhost:3000'],
+      origin: ["https://htron.site",'http://localhost:7000'],
       methods: ['GET', 'POST'],
     },
   });
