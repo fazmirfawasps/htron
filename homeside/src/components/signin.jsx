@@ -7,7 +7,6 @@ import { setId, setHostapplied, setVerified } from '../redux/redux';
 import { useDispatch, } from 'react-redux'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { useEffect } from 'react';
 
 // import GoogleIcon from '@mui/icons-material/Google'
 // import { useDispatch, useSelector } from 'react-redux'
