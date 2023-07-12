@@ -32,17 +32,17 @@ import Signin from '../../components/signin';
 import OtpInput from 'react-otp-input';
 import { CheckMobNo } from '../../api/apicall';
 
-import { useDispatch,} from 'react-redux'
-import { setId,setHostapplied,setVerified } from '../../redux/redux';
+import { useDispatch, } from 'react-redux'
+import { setId, setHostapplied, setVerified } from '../../redux/redux';
 
 
 
-export default function Basepart({ key,Changekey, ChangeEmail, handleClose }) {
+export default function Basepart({ key, Changekey, ChangeEmail, handleClose }) {
     console.log(key);
-    const dispatch =useDispatch()
+    const dispatch = useDispatch()
     const [timeRemaining, setTimeRemaining] = useState();
-    const [user,setUser]=useState({})
-    const[otp,setOtp]=useState('')
+    const [user, setUser] = useState({})
+    const [otp, setOtp] = useState('')
     useEffect(() => {
         const interval = setInterval(() => {
             if (timeRemaining === 0) {
@@ -73,19 +73,24 @@ export default function Basepart({ key,Changekey, ChangeEmail, handleClose }) {
 
     // const [otp, setOtp] = useState('')
     const [confirm, setConfirm] = useState('')
-    const[otperror,setOtperror] = useState('')
+    const [otperror, setOtperror] = useState('')
+    const [Blockerror, setBlockerror] = useState('')
 
+const errBlock=(value)=>{
+    setBlockerror(value)
+}
 
     // const [otp,setOtp] = useState('')
     const sentotp = async () => {
         try {
-            const recaptchaVerifier = await new RecaptchaVerifier('recaptcha', {} ,auth)
+            const recaptchaVerifier = await new RecaptchaVerifier('recaptcha', {}, auth)
             const mob = '+' + phoneNumber
             console.log(mob);
             setformatedMobno(mob.replace(/(\+\d{2})(\d+)(\d{4})/, "$1******$3"))
             const confirmation = await signInWithPhoneNumber(auth, mob, recaptchaVerifier)
             console.log('working');
             setshowotp(!showotp)
+            console.log(user);
             console.log(confirmation);
             setConfirm(confirmation)
             setTimeRemaining(60);
@@ -106,16 +111,18 @@ export default function Basepart({ key,Changekey, ChangeEmail, handleClose }) {
         console.log(result);
 
         CheckMobNo(result).then(({ data }) => {
-
+            console.log('otp dataa');
+            console.log(data);
             if (data) {
-                if(!data[0].block){
+                if (!data[0].block) {
                     sentotp(mob)
                     setUser(data[0])
 
+
                 }
-                else{
+                else {
                     setMoberror('Mobile number  is blocked by admin')
-  
+
                 }
             }
             else {
@@ -132,7 +139,7 @@ export default function Basepart({ key,Changekey, ChangeEmail, handleClose }) {
 
             const recaptchaVerifier = await new RecaptchaVerifier('recaptchar', {
                 size: 'invisible',
-                callback: () => {},
+                callback: () => { },
             }, auth)
             const mob = '+' + phoneNumber
             console.log(mob);
@@ -156,9 +163,11 @@ export default function Basepart({ key,Changekey, ChangeEmail, handleClose }) {
             console.log('working otp succes');
             setOtperror('');
 
-       dispatch(setId(user._id))   
-       dispatch(setHostapplied(user.Hostapplied))   
-       dispatch(setVerified(user.Verified))   
+            dispatch(setId(user._id))
+            dispatch(setHostapplied(user.Hostapplied))
+            dispatch(setVerified(user.Verified))
+            localStorage.setItem('userAccessToken', user.token.accessToken);
+            localStorage.setItem('userRefreshToken', user.token.refreshToken)
         }).catch((error) => {
             // User couldn't sign in (bad verification code?)
             setOtperror('incorrect otp');
@@ -202,9 +211,9 @@ export default function Basepart({ key,Changekey, ChangeEmail, handleClose }) {
                                 </Avatar>
                             </Grid> */}
                             <Grid item>
-                                <Typography component="h1" variant="h5">
+                                {/* <Typography component="h1" variant="h5">
                                     User Login
-                                </Typography>
+                                </Typography> */}
                             </Grid>
                         </Grid>
                     </Grid>
@@ -253,8 +262,17 @@ export default function Basepart({ key,Changekey, ChangeEmail, handleClose }) {
                 fontSize: 'x-large',
             }} />
 
-            <Signin Changekey={Changekey} ChangeEmail={ChangeEmail} handleClose={handleClose}></Signin>
+            <Signin Changekey={Changekey} ChangeEmail={ChangeEmail} handleClose={handleClose} errBlock={errBlock} ></Signin>
         </Button>
+        <div className="text-center ">
+
+
+
+            <Typography style={{color:'red'}}>{Blockerror}</Typography>
+
+
+
+        </div>
     </MDBContainer>
 
     const secondOtp = (<>
@@ -318,10 +336,10 @@ export default function Basepart({ key,Changekey, ChangeEmail, handleClose }) {
                         </Grid>
                         <Grid item xs={12} textAlign="center">
                             <Paper elevation={0}>
-                                
-                                    {timeRemaining >0 ?<Typography  > {timeRemaining} seconds remaining`</Typography> : <Typography onClick={resendOtp}  style={{color:'#2B3467'}}>Resend OTP</Typography>}
-                                    <Typography  sx={{color:'red'}}> {otperror}</Typography>
-                                
+
+                                {timeRemaining > 0 ? <Typography  > {timeRemaining} seconds remaining`</Typography> : <Typography onClick={resendOtp} style={{ color: '#2B3467' }}>Resend OTP</Typography>}
+                                <Typography sx={{ color: 'red' }}> {otperror}</Typography>
+
                             </Paper>
                         </Grid>
                         <div id='recaptchar'  ></div>
