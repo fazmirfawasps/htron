@@ -264,15 +264,15 @@ CancelBooking:async(req,res)=>{
 getallDashboard:async(req,res)=>{
 
 console.log('dashBord')
-let booking = await adminHelpers.totalBookingPerDay()
+const booking = await adminHelpers.totalBookingPerDay()
 console.log(booking);
-let nofp = await adminHelpers.totalNumberOfProperty()
+const nofp = await adminHelpers.totalNumberOfProperty()
 console.log(nofp);
-let moneyperweek= await adminHelpers.moneyGeneratedPerWeek()
+const moneyperweek= await adminHelpers.moneyGeneratedPerWeek()
 console.log(moneyperweek);
 
-let moneypToday= await adminHelpers.calculateTodayAmount()
-let totalmoney = await adminHelpers.getTotalBookingAmount()
+const moneypToday= await adminHelpers.calculateTodayAmount()
+const totalmoney = await adminHelpers.getTotalBookingAmount()
 
 const data ={}   
 data.totalBookingPerDay = booking

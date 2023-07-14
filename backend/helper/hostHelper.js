@@ -19,7 +19,7 @@ module.exports = {
   GethostProperty: ({ hostid }) => {
     console.log(hostid)
 
-    let id = hostid
+    const id = hostid
 
     return new Promise((resolve, reject) => {
       db.get()
@@ -60,7 +60,7 @@ module.exports = {
   },
   AddHostdetails: (Data) => {
 
-let hostid =Data.hostid
+    const hostid =Data.hostid
     return new Promise((resolve, reject) => {
       db.get().collection('HostDetails').insertOne(Data).then((response) => {
         console.log(response);

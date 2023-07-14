@@ -2,7 +2,7 @@ import React from 'react'
 import { Player } from '@lottiefiles/react-lottie-player'
 import { Box } from '@mui/material'
 function Loading() {
-    // let player = useRef(null)
+    // const player = useRef(null)
 
     return (
         <Box mt={15}>

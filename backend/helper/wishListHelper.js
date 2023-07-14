@@ -30,7 +30,7 @@ removeWishlist:(body)=>{
 getWishlist:(id)=>{
 
     return new Promise(async(resolve, reject) => {
-     let result = await   db.get().collection('WishList').aggregate([
+      const result = await   db.get().collection('WishList').aggregate([
             { $match: { userid: id } },
             { $unwind: "$wishlist" },
             {
@@ -51,7 +51,7 @@ getWishlist:(id)=>{
           ]).toArray();
           console.log(result);
           console.log('wishlist order');
-          let whishlistitem = result.map((item) => item.property);
+          const whishlistitem = result.map((item) => item.property);
           console.log(whishlistitem)
           resolve(whishlistitem)
     })

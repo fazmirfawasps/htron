@@ -23,7 +23,7 @@ import { useNavigate } from 'react-router-dom'
 
 
 export default function BookingCard({ SingleProperty }) {
-    let userid = useSelector((state) => state.user.id)
+    const userid = useSelector((state) => state.user.id)
     const navigate = useNavigate()
 
     const [startDate, setStartDate] = React.useState(dayjs())

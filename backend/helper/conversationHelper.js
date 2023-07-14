@@ -3,13 +3,13 @@ const { ObjectId } = require('mongodb');
 
 module.exports={
     addConversation: async (data) => {
-      const  conversation = [
+      const conversation = [
             new ObjectId(data.senderid),
             new ObjectId(data.receiverid),
           ]
           console.log(conversation);
     return new Promise(async (resolve, reject) => {
-        let findIfExsist = await db.get().collection('Converstaions').findOne({conversation:{$all:[new ObjectId(data.senderid),new ObjectId(data.receiverid)]}})
+      const findIfExsist = await db.get().collection('Converstaions').findOne({conversation:{$all:[new ObjectId(data.senderid),new ObjectId(data.receiverid)]}})
             if (!findIfExsist) {
             db.get().collection('Converstaions').insertOne({conversation})
             }
@@ -27,7 +27,7 @@ module.exports={
 
     return new Promise(async(resolve, reject) => {
         try {
-            let result = await db.get().collection('Converstaions').aggregate([
+          const result = await db.get().collection('Converstaions').aggregate([
               {
                 $match: {
                   conversation: {

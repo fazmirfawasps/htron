@@ -13,7 +13,7 @@ import { ExternalContext } from '../context/CustomContext'
 function Editproperty() {
     const { propertyEdit } = useContext(ExternalContext)
     console.log(propertyEdit);
-    let defaultData = propertyEdit
+    const defaultData = propertyEdit
 
 
 

@@ -22,7 +22,7 @@ module.exports = {
   getOrders: (id) => {
     return new Promise(async (resolve, reject) => {
       console.log(id);
-      let orders = await db.get().collection('Booking').aggregate([
+      const orders = await db.get().collection('Booking').aggregate([
         { $match: { userid: id } },
         {
           $lookup: {
@@ -125,7 +125,7 @@ module.exports = {
   getAllorders: () => {
     return new Promise(async (resolve, reject) => {
       console.log();
-      let orders = await db.get().collection('Booking').aggregate([
+      const orders = await db.get().collection('Booking').aggregate([
         { $match: {  } },
         {
           $lookup: {

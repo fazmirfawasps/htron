@@ -184,7 +184,7 @@ module.exports = {
     totalBookingPerDay: () => {
 
         return new Promise(async (resolve, reject) => {
-            let result = await db.get().collection('Booking').aggregate([
+            const result = await db.get().collection('Booking').aggregate([
                 { $match: {} },
                 {
                     $addFields: {
@@ -225,7 +225,7 @@ module.exports = {
 
     totalNumberOfProperty: () => {
         return new Promise(async (resolve, reject) => {
-            let result = await db.get().collection('PropertyList').countDocuments({})
+            const result = await db.get().collection('PropertyList').countDocuments({})
             console.log(result);
             if(result.length==0){
                 console.log('ivdyaano');
@@ -249,7 +249,7 @@ module.exports = {
             currentDate.getTime() - 7 * 24 * 60 * 60 * 1000
         );
         return new Promise(async (resolve, reject) => {
-            let result = await db.get().collection('Booking').aggregate([
+            const result = await db.get().collection('Booking').aggregate([
                 { $match: { createdAt: { $gte: sevenDaysAgo, $lte: currentDate } } },
                 { $group: { _id: 0, weeklyAmount: { $sum:  { $toInt: "$totalprice" } } } },
                 { $project: { weeklyAmount: 1, _id: 0 } },

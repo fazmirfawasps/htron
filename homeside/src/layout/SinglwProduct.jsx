@@ -15,14 +15,12 @@ import { useParams } from 'react-router-dom';
 
 export default function SingleProperty() {
     const { id } = useParams();
-    let count =0
     const [SingleProperty, setSingleProperty] = React.useState({})
     React.useEffect(() => {
         api.get('/getAllproperty').then(({ data }) => {
             console.log(data)
-            console.log(count+1);
             console.log('SINGLE PROPERTY');
-            let singleProperty = data.find((item) => item._id == id)
+            const singleProperty = data.find((item) => item._id == id)
             console.log(singleProperty);
             setSingleProperty(singleProperty)
 

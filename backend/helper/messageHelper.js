@@ -21,7 +21,7 @@ module.exports = {
     },
     getMessages: (id) => {
         return new Promise(async (resolve, reject) => {
-            let messages = await db.get().collection('Messages').find({
+            const messages = await db.get().collection('Messages').find({
                 conversationid: id,
 
             }).toArray()

@@ -7,7 +7,7 @@ module.exports = {
 
         return new Promise(async (resolve, reject) => {
             console.log('1st');
-            let isUser = await db.get().collection('user').find({ Email: user.email }).toArray()
+            const isUser = await db.get().collection('user').find({ Email: user.email }).toArray()
             console.log(isUser);
             if (isUser.length != 0) {
                 console.log('2st');
@@ -24,7 +24,7 @@ module.exports = {
                     block: false
                 }).then(async(response) => {
                     console.log('1st');
-                    let isUser = await db.get().collection('user').find({ Email: user.email }).toArray()
+                    const isUser = await db.get().collection('user').find({ Email: user.email }).toArray()
                     console.log(isUser);
                     if (isUser.length != 0) {
                         console.log('2st');
@@ -44,7 +44,7 @@ module.exports = {
     ,
     editUser: (user) => {
         return new Promise(async (resolve, reject) => {
-            let isNumexisted = await db.get().collection('user').find({ MobileNumber: user.MobileNumber }).toArray()
+            const isNumexisted = await db.get().collection('user').find({ MobileNumber: user.MobileNumber }).toArray()
             console.log(isNumexisted);
             if (isNumexisted.length != 0) {
 
@@ -63,7 +63,7 @@ module.exports = {
     ,
     checkNum: ({ MobileNumber }) => {
         return new Promise(async (resolve, reject) => {
-            let isNumexisted = await db.get().collection('user').find({ MobileNumber: MobileNumber }).toArray()
+            const isNumexisted = await db.get().collection('user').find({ MobileNumber: MobileNumber }).toArray()
             console.log(isNumexisted);
             if (isNumexisted.length != 0) {
                 console.log('2st');
@@ -82,7 +82,7 @@ module.exports = {
     },
     getauser: (id) => {
         return new Promise(async (resolve, reject) => {
-            let user = await db.get().collection('user').find({ _id: new ObjectId(id) }).toArray()
+            const user = await db.get().collection('user').find({ _id: new ObjectId(id) }).toArray()
             console.log(user);
             resolve(user)
 

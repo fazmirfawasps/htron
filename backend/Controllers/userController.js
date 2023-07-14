@@ -163,7 +163,7 @@ exports.deleteProperty = (req, res, next) => {
 exports.hostdetails = (req, res) => {
     console.log('hostdetails');
     console.log(req.body);
-    let hostdetails = req.body;
+    const hostdetails = req.body;
     hostdetails.image = req.file.filename;
     hostdetails.Verified = false;
     hostHelper

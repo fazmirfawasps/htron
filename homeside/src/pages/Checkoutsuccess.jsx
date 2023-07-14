@@ -6,8 +6,8 @@ import { Box, Typography } from '@mui/material'
 import { useNavigate } from 'react-router-dom'
 import { verifyOrder } from '../api/apicall'
 function CheckoutSuccess() {
-    let player = useRef(null)
-    let navigate = useNavigate()
+    const player = useRef(null)
+    const navigate = useNavigate()
     const [state, setState] = React.useState(false)
     useEffect(() => {
         console.log('jcdcnkjcfkcn');
