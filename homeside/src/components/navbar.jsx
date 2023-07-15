@@ -77,6 +77,7 @@ const settings = [
 function ResponsiveAppBar() {
   useEffect(() => {
     document.body.style.overflow = 'inherit';
+    document.body.style.paddingRight = '0';
 
   })
   const dispatch = useDispatch()

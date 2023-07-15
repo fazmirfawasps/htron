@@ -82,7 +82,7 @@ export default function Viewhosted() {
     return (
         <Box mt={10}>
             <Container maxWidth="xl" sx={{ width: '94%' }}>
-                <Typography variant="h4" color={'#955251'} fontWeight={600}>
+                <Typography variant="h6" color={ '#2B3467'} fontWeight={600}>
                     Listed Vehicle
                 </Typography>
                 <HostPropertyCard
