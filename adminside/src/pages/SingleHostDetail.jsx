@@ -52,15 +52,12 @@ export default function SingleHostDetailpage() {
 
     const Verify = (id,hostid) => {
 
-        console.log(id);
-        console.log('verify');
         api.post(`/admin/verifyHostdetail`,
              {
               id: id,
               hostid:hostid
             })
             .then(() => {
-                console.log('POST request successful');
                 setChange(!change)
                 // Perform additional actions here
             })
@@ -75,18 +72,14 @@ export default function SingleHostDetailpage() {
     useEffect(() => {
         api.post('/admin/getAHostdetail', id)
             .then(({ data }) => {
-                console.log(data);
 
 
                 setHostdetail(data);
-                console.log(data);
             })
             .catch(error => {
                 console.error(error);
             });
     }, [change]);
-    console.log('dd');
-    console.log(HostDetail);
 
     return (
         <Box sx={{

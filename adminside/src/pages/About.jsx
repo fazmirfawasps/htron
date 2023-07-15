@@ -9,26 +9,18 @@ const About = () => {
     const [user, setUser] = useState([])
     const [change, setChange] = useState(false)
     const handleChange = useCallback(() => {
-        console.log('NADAKND');
         setChange(prevChange => !prevChange);
     }, []);
     const [users, setUsersearch] = useState([])
 
     const Handlesearch = (search) => {
-        console.log(user);
-        console.log(search);
 
-        console.log('IVDYAN PRSHNAM');
-        console.log(users);
-        console.log('IVDYAN PRSHNAM');
 
         let resul = users.filter((item) => item.FullName.includes(search));
-        console.log(resul);
         setUser(resul);
     }
     useEffect(() => {
         api.get('/admin/getuser').then(({ data }) => {
-            console.log(data);
             const datas = data.map(item => ({
                 ...item,
                 block: <ToggleSwitch data={item.block} userId={item._id} handle={handleChange} change={change}></ToggleSwitch>
@@ -40,7 +32,6 @@ const About = () => {
             setUsersearch(datas)
 
 
-            console.log(datas)
         })
     }, [change, handleChange])
     return (

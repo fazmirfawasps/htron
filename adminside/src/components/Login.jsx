@@ -39,7 +39,6 @@ export default function SignIn() {
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const admin = useSelector(state => state.admin)
-  console.log(admin);
  React.useEffect(() => {
     // Call the `navigate` function to navigate to a different page
     if (admin.loggedIn) {
@@ -54,8 +53,6 @@ export default function SignIn() {
   // const handleSubmit = (event) => {
   //   event.preventDefault();
   //   const data = new FormData(event.currentTarget);
-  //   console.log(data);
-  //   console.log({
   //     email: data.get('email'),
   //     password: data.get('password'),
 
@@ -66,7 +63,6 @@ export default function SignIn() {
   //   //   }})
   // };
   const sendData = () => {
-    console.log(email + pass);
     setError('')
     api.get('/admin', {
       params: {
@@ -74,19 +70,16 @@ export default function SignIn() {
         pass: pass
       }
     }).then((response) => {
-      console.log(response.data);
 
       const { accessToken, refreshToken } = response.data;
       localStorage.setItem('accessToken', accessToken);
       localStorage.setItem('refreshToken', refreshToken);
       dispatch(setLoggedIn(true))
 
-      console.log(admin);
       navigate('/')
 
     })
-      .catch((error) => {
-        console.log(error);
+      .catch(() => {
         setError('invalid password or email')
       });
   }

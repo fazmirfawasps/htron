@@ -7,7 +7,6 @@ import Editcategory from "./Editcategory";
 
 
 export default function DeleteCatagory({ data, onClick }) {
-  console.log(data);
   const dele = () => {
     swal({
       title: 'Are you sure?',
@@ -18,14 +17,12 @@ export default function DeleteCatagory({ data, onClick }) {
     })
       .then((willDelete) => {
         if (willDelete) {
-          console.log(data._id)
           api.delete('/admin/category', {
             data: {
               id: data._id,
               name: data.Category
             }
           }).then(({ data }) => {
-            console.log(data);
             const datas = data.map(item => ({
               ...item,
               delete: <DeleteCatagory data={item} onClick={onClick}></DeleteCatagory>,
@@ -45,7 +42,6 @@ export default function DeleteCatagory({ data, onClick }) {
           swal('Your file is safe!');
         }
       });
-    console.log('working delete category');
 
   }
 

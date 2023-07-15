@@ -9,13 +9,10 @@ import api from "../axios/axios";
     const data ={title:'Add Category'}
     const handleClick = () => {
       // Do something
-      console.log("Child element clicked");
-      console.log(image);
       
       const formData = new FormData();
     formData.append('image', image);
     formData.append('name',category)
-    console.log(formData)
       
       if(category.length > 1){
         api.post('/admin/addcategory', formData,{
@@ -25,7 +22,6 @@ import api from "../axios/axios";
           
         }).then(()=>{
          props.handleChange()
-         console.log(props.change);
           setCategory('')
           setError('')
         })

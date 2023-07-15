@@ -5,8 +5,6 @@ import DeleteCatagory from "./Deletecategory"
 import { FaEdit } from "react-icons/fa"
 
 export default function Editcategory(props) {
-  console.log('ntho patti');
-  console.log(props.data.image);
 
   const [image, setImage] = useState('null')
   const data = { title: 'Edit Category' }
@@ -16,9 +14,6 @@ export default function Editcategory(props) {
   
   const handleClick = () => {
     // Do something
-    console.log(image);
-    console.log("Child element clicked");
-    console.log(id);
     const formData = new FormData();
     formData.append('image', image);
     formData.append('Category', edit)
@@ -28,7 +23,6 @@ export default function Editcategory(props) {
 
     formData.append('id', id)
 
-    console.log(formData)
     api.post('/admin/editcategory', formData, {
       headers: {
         'Content-Type': 'multipart/form-data'

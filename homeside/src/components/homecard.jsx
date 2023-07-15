@@ -213,7 +213,7 @@ export default function Homecard() {
                 image="/jcb.jpg"
                 alt="jcb.jpg"
               />
-              <IconButton style={{ position: 'absolute', top: '10px', right: '10px', color: 'rgba(0, 0, 0, 0.6)', color: isFavorite ? '#f44336' : '#484848' }} onClick={handleFavoriteClick}>
+              <IconButton style={{ position: 'absolute', top: '10px', right: '10px', color: isFavorite ? '#f44336' : '#484848' }} onClick={handleFavoriteClick}>
                 <FavoriteIcon />
               </IconButton>
               <div style={{ position: 'absolute', top: '85%', left: '50%', transform: 'translate(-50%, -50%)', color: '#fff' }}>

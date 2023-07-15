@@ -17,7 +17,6 @@ const Booking = () => {
         bgcolor: 'red',
     }
     function Cancel(orderid) {
-        console.log(orderid);
         swal({
             title: 'Are you sure?',
             text: 'This action cannot be undone!',
@@ -28,20 +27,18 @@ const Booking = () => {
             .then((willDelete) => {
 
                 if (willDelete) {
-                    console.log('working');
                     api.patch(`/admin/Cancelbooking/${orderid}`).then(() => {
                         setChange(!change)
                     })
 
                 }
             }).catch((err) => {
-                console.log(err);
+                console.log(err)
             })
 
 
     }
     useEffect(() => {
-        console.log();
         api.get('/admin/getallorder').then(({ data }) => {
             const datas = data.map((item) => ({
                 ...item,

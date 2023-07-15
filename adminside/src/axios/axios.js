@@ -22,11 +22,9 @@ api.interceptors.request.use(
 );
 const refreshAccessToken = async () => {
   try {
-    console.log('refresh console ');
     const response = await api.post('/admin/refresh', {
       refreshToken: localStorage.getItem('refreshToken'),
     });
-    console.log(response.data);
     localStorage.setItem('accessToken', response.data.accessToken);
     return true;
   } catch (error) {
@@ -39,7 +37,6 @@ api.interceptors.response.use(
   },
   (error) => {
     const originalRequest = error.config;
-    console.log(originalRequest);
     if (error.response.status === 401 && !originalRequest._retry) {
       originalRequest._retry = true;
       return refreshAccessToken().then((success) => {

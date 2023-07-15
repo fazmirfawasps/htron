@@ -19,25 +19,19 @@ export default function Modaldiv(props) {
   const [file, setFile] = useState(null);
   const [imag, setImg] = useState(null)
   useEffect(() => {
-    console.log('nthey vallathum nadanna');
 
-    console.log(file);
   }, [file]);
 
   const showfile = () => {
-    console.log(file);
   }
   
 
   const handleFileChange = (event) => {
-    console.log(event.target.files[0]);
     const selectedFile = event.target.files[0];
     setFile(selectedFile);
-    console.log(selectedFile);
     setFile(selectedFile);
     props.imageChange(event.target.files[0])
 
-    console.log(file);
     showfile()
 
     const objectUrl = URL.createObjectURL(event.target.files[0]);
@@ -46,15 +40,11 @@ export default function Modaldiv(props) {
 
   };
 //   if(props.id){
-// console.log(props.id.image);
 // setImg(props.id.image)
-//     console.log('editil matram ullu');
 //   }
 useEffect(() => {
   if (props.id) {
-    console.log(props.id.image);
     setImg(props.id.image);
-    console.log('editil matram ullu');
   }
 }, [props.id])
 
@@ -65,11 +55,10 @@ useEffect(() => {
   //   // send the formData object to the server
   // };
 
-  console.log(props);
   
   const Close = () => { return setShow(false); }
 
-  const handleClose = () => { setEdit(false); console.log('jnesdd'); console.log(value); console.log(file); props.onClick(); return setShow(false); }
+  const handleClose = () => { setEdit(false); props.onClick(); return setShow(false); }
   const handleShow = () => setShow(true);
   const onput = (e) => {
     if (props.id) {

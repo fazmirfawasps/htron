@@ -14,10 +14,8 @@ function ToggleSwitch({data,userId,handle},change) {
             user:userId,
             action: data
         }
-    }).then((response)=>{
-        console.log(response);
-        console.log(handle);
-        console.log('response kittnad');
+    }).then(()=>{
+      
     handle()
     })
   }

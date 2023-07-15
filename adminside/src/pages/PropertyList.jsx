@@ -17,7 +17,6 @@ const PropertyList = () => {
         bgcolor: 'red',
     }
     // const handleChange = useCallback(() => {
-    //     console.log('NADAKND');
     //     setChange(prevChange => !prevChange);
     // }, []);
     const removeProperty = (id) => {
@@ -29,50 +28,49 @@ const PropertyList = () => {
             dangerMode: true,
         })
             .then((willDelete) => {
-                if (willDelete){
-                     api.delete(`/admin/removeProperty/${id}`).then(() => {
+                if (willDelete) {
+                    api.delete(`/admin/removeProperty/${id}`).then(() => {
                         setChange(!change)
 
-                   
-                    }) }
-                
-                }).catch((err)=>{
-                    console.log(err);
-                })
-            }
+
+                    })
+                }
+
+            }).catch((err) => {
+                console.log(err);
+            })
+    }
 
     useEffect(() => {
-                api.get('/admin/getAllPropertyList').then(({ data }) => {
-                    console.log(data);
-                    const datas = data.map((item) => ({
-                        ...item,
-                        Activate: item.Activate ? 'activated' : 'deactivated',
+        api.get('/admin/getAllPropertyList').then(({ data }) => {
+            const datas = data.map((item) => ({
+                ...item,
+                Activate: item.Activate ? 'activated' : 'deactivated',
 
 
-                        Action: (<BtnComponent
-                            variant={'contained'}
-                            style={style2}
-                            callback={() => {
-                                removeProperty(item._id)
-                            }}
-                            content={' Remove'}
-                        />)
+                Action: (<BtnComponent
+                    variant={'contained'}
+                    style={style2}
+                    callback={() => {
+                        removeProperty(item._id)
+                    }}
+                    content={' Remove'}
+                />)
 
 
 
 
-                    }));
-                    setProperty(datas)
-                    console.log(datas)
-                })
-            }, [change])
+            }));
+            setProperty(datas)
+        })
+    }, [change])
     return (
-            <Box>
-                <Typography variant="h4" textAlign={"center"} m={2}>
-                    Vehicle Management
-                </Typography>
-                <Tablecomponent Data={Property} ></Tablecomponent>
-            </Box>
-        );
-    };
-    export default PropertyList;
+        <Box>
+            <Typography variant="h4" textAlign={"center"} m={2}>
+                Vehicle Management
+            </Typography>
+            <Tablecomponent Data={Property} ></Tablecomponent>
+        </Box>
+    );
+};
+export default PropertyList;

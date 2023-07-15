@@ -15,7 +15,6 @@ import MenuItem from '@mui/material/MenuItem';
 // import api from '../axios/axios';
 import { useEffect } from 'react';
 // import ModalDialog from './modal';
-import { auth, } from '../firebase/firebase';
 import { NavLink, } from 'react-router-dom';
 import Login from '../layout/Login/Login';
 import { useSelector, useDispatch } from 'react-redux'
@@ -92,7 +91,7 @@ function ResponsiveAppBar() {
     localStorage.removeItem('userRefreshToken');
     toast.success('Logout succuesfully.', { autoClose: 2000 })
   }
-  
+
   // const googlesignin = () => {
   //   signInWithPopup(auth, googleProvider).then((data) => {
   //   })

@@ -17,7 +17,6 @@ export default function Categories(props) {
   }
   useEffect(() => {
     api.get('/admin/category').then(({ data }) => {
-      console.log(data);
       const datas = data.map(item => ({
         ...item,
         delete: <DeleteCatagory data={item} onClick={changeCategory} ></DeleteCatagory>,
@@ -27,7 +26,6 @@ export default function Categories(props) {
 
       }));
       setCategory(datas)
-      console.log(datas);
     })
   }, [props.change])
   return (

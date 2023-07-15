@@ -22,7 +22,6 @@ export default function Hostdetail() {
   useEffect(() => {
     api.get('/admin/getAllHostdetail')
       .then(({ data }) => {
-        console.log(data);
         const updatedData = data.map(item => ({
           ...item,
           View: <BtnComponent variant="primary" callback={() => {
@@ -32,7 +31,6 @@ export default function Hostdetail() {
           // Update BtnComponent props accordingly
         }));
         setHostdetail(updatedData);
-        console.log(updatedData);
       })
       .catch(error => {
         console.error(error);
