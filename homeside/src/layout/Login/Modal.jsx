@@ -8,12 +8,10 @@ import { ExternalContext } from '../../context/CustomContext';
 
 
 export default function ModalPage({Key,Changekey}) {
-    console.log(Key);
     const {show, setShow}=  useContext(ExternalContext)
 
 
     const handleClose = () =>{setShow(false) 
-        console.log('workinh');
         document.body.style.overflow= 'inherit'; 
         } ;
     const handleShow = () => setShow(true);

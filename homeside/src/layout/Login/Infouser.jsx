@@ -5,14 +5,11 @@ import { Button } from '@mui/material';
 import { UpdateUser } from '../../api/apicall';
 export default function InfoUser({ Changekey,email ,handleClose }) {
   const methods = useForm();
-  console.log(email);
   const[Moberror,setMoberror]=useState('')
 
   const onSubmit = (data) => {
-    console.log(data);
     UpdateUser(email,data).then(({data})=>{
 if(data){
-  console.log('nthann prshnm');
   
   setMoberror('Mobile number already exists')
 }

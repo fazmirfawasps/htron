@@ -53,7 +53,6 @@ export default function BasicTabs() {
     };
     const userid = useSelector((state) => state.user.id)
     const today = new Date()
-    console.log(today);
     const [order, setOrder] = React.useState([])
     const [todayOrders, setTodayorder] = React.useState([])
     const [upcomeOrders, setUpcomeorder] = React.useState([])
@@ -61,7 +60,6 @@ export default function BasicTabs() {
 
     const [change, setChange] = React.useState(false)
     function Cancel(id) {
-        console.log(id);
         swal({
             title: 'Are you sure?',
             text: 'This action cannot be undone!',
@@ -72,7 +70,6 @@ export default function BasicTabs() {
             .then((willDelete) => {
 
                 if (willDelete) {
-                    console.log('working');
                     Cancelorder(id).then(() => {
                         setChange(!change)
                     })
@@ -88,9 +85,7 @@ export default function BasicTabs() {
         backgroundColor: '#d4213f'
     }
     useEffect(() => {
-        console.log(userid);
         getUserOrders(userid).then(({ data }) => {
-            console.log(data);
             const datas = data.map((item) => ({
                 ...item,
                 Image: <img src={`http://htron.site/api/images/${item.Image}`} style={{ width: '50px' }}></img>,
@@ -105,7 +100,6 @@ export default function BasicTabs() {
 
             }))
             
-            console.log('DNSJKN');
             const tod =datas.filter((order) => {
                 const checkinDateParts = order.Checkin.split('-');
                 const checkoutDateParts = order.Checkout.split('-');
@@ -156,8 +150,6 @@ export default function BasicTabs() {
             }
               ))
             
-            console.log(tod);
-            // console.log(datas.filter((order) => todayString >= order.Checkin && todayString <= order.Checkout));
             setTodayorder(tod)
             setUpcomeorder(Upcoming)
             setOrder(datas)

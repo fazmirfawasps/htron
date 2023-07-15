@@ -6,7 +6,7 @@ import Box from '@mui/material/Box'
 import { CardContent, Typography, Grid, Paper, Card } from '@mui/material'
 import WalletIcon from '@mui/icons-material/Wallet'
 import PropTypes from 'prop-types';
-import BtnComponent from '../components/btncomponent'
+// import BtnComponent from '../components/btncomponent'
 
 const ProfileContainer = styled('div')(({ theme }) => ({
     display: 'flex',

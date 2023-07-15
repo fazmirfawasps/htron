@@ -77,7 +77,6 @@ const settings = [
 
 function ResponsiveAppBar() {
   useEffect(() => {
-    console.log('working style overflow');
     document.body.style.overflow = 'inherit';
 
   })
@@ -93,10 +92,9 @@ function ResponsiveAppBar() {
     localStorage.removeItem('userRefreshToken');
     toast.success('Logout succuesfully.', { autoClose: 2000 })
   }
-  console.log(auth);
+  
   // const googlesignin = () => {
   //   signInWithPopup(auth, googleProvider).then((data) => {
-  //     console.log(data.user.email);
   //   })
   // }
   const userId = useSelector((state) => state.user.id)

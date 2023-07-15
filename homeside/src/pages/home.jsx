@@ -35,31 +35,23 @@ export default function Home() {
   useEffect(() => {
     GetAllProperty()
       .then(({ data }) => {
-        console.log(data);
         let propertyData = data;
-        console.log(userId);
         const isHosted = data.find((item) => item.hostid === userId);
         if (isHosted) {
-          console.log('TRUE BOOLEAN');
           dispatch(setIshosted(true));
         } else {
           dispatch(setIshosted(false));
-          console.log('false BOOLEAN');
         }
         if (userId) {
           getWishlist(userId)
             .then(({ data }) => {
-              console.log(data);
-              console.log('wishlist kiitti');
               const newArray = propertyData.map((item) => {
                 const matchingItem = data.find((obj) => obj._id === item._id);
                 if (matchingItem) {
-                  console.log('OOMBI');
-                  return { ...item, wishlist: true };
+                 return { ...item, wishlist: true };
                 }
                 return item;
               });
-              console.log(newArray);
               setProperty(newArray);
             })
             .catch(() => {});
@@ -77,7 +69,6 @@ export default function Home() {
     api
       .get(`/getauserdetail/${userId}`)
       .then(({ data }) => {
-        console.log(data);
         dispatch(setHostapplied(data[0].Hostapplied));
         dispatch(setVerified(data[0].Verified));
       })
@@ -93,7 +84,6 @@ export default function Home() {
     if (userId) {
       try {
         postwishlist(userId, property._id).then(() => {
-          console.log('addto favorite');
           setChange(!change);
         });
       } catch (err) {

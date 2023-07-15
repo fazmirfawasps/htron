@@ -34,7 +34,6 @@ export function SearchProperty() {
         async function getSearchProperty() {
             try {
                 GetAllProperty().then(({ data }) => {
-                    console.log(data);
                     var property =data
                     const maxValue = data.reduce((acc, item) => {
                         return Math.max(acc, item.Price)
@@ -47,17 +46,13 @@ export function SearchProperty() {
                     setMAXIMUM(maxValue)
                     setMINIMUM(minValue)
                     getWishlist(userId).then(({ data }) => {
-                        console.log(data);
-                        console.log('wishlist kiitti');
                         const newArray = property.map(item => {
                             const matchingItem = data.find(obj => obj._id === item._id);
                             if (matchingItem) {
-                                console.log('OOMBI');
                               return { ...item, wishlist:true };
                             }
                             return item;
                           });
-                          console.log(newArray);
                           setProperty(newArray)
                           setFilteredProperty(newArray)
 
@@ -68,7 +63,6 @@ export function SearchProperty() {
                 })
 
                 VehicleType().then(({ data }) => {
-                    console.log(data);
                     setPropertyType(data.map((item) => item.Category))
 
                 })
@@ -92,7 +86,6 @@ export function SearchProperty() {
     }, [categoryFiter])
     function handlePrice(e) {
         let value = e.target.value
-        console.log(value)
         setMin(value[0])
         setMax(value[1])
         const newFilteredProperty = Property.filter(
@@ -105,10 +98,7 @@ export function SearchProperty() {
         naviagate(`/View-SingleProduct/${id}`)
     }
     const Handlesearch = (search) => {
-        console.log(search);
 
-        console.log('IVDYAN PRSHNAM');
-        console.log('IVDYAN PRSHNAM');
  
         let newFilteredProperty = Property.filter((item) => item.PropertyName.includes(search));
         

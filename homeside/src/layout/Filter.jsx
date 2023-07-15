@@ -47,7 +47,6 @@ function FilterBar({
                                 cursor: 'pointer',
                             }}
                             onClick={() => {
-                                console.log('WORKING');
                                 setCategoryFilter(Elemt)
                             }}
                         >

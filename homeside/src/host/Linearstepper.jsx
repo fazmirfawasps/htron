@@ -22,7 +22,6 @@ import swal from 'sweetalert';
 function Findform({ activeStep , setValue,
     // imgErr
 }) {
-    console.log(activeStep)
 
     switch (activeStep) {
         case 0:
@@ -50,16 +49,11 @@ function Findform({ activeStep , setValue,
   
 export default function LinearStepper({ defaultData, isEdit }) {
     const userId = useSelector((state) => state.user.id)
-    console.log('checking user id');
-    console.log(userId);
     const { trigger, ...methods } = useForm({
         defaultValues: defaultData,
     })
-    console.log(defaultData);
     
 
-    console.log('what are u');
-    console.log('what are u');
     const [activeStep, setActiveStep] = useState(0)
     // const [loading, setLoading] = useState(false)
     const matches = useMediaQuery('(min-width:600px)')
@@ -75,7 +69,6 @@ export default function LinearStepper({ defaultData, isEdit }) {
         navigate('/')
     }
     function handleNext() {
-        console.log('working findForm');
         if (activeStep <= 4) {
             setActiveStep(activeStep + 1)
         } else {
@@ -87,21 +80,14 @@ export default function LinearStepper({ defaultData, isEdit }) {
     }
     const [imgErr, setimgErr] = useState(false)
     async function onSubmit(data) {
-        console.log(data)
-        console.log('wooo');
         if (activeStep < 3) {
-            console.log('handle next');
             handleNext()
         } else { 
             let isValid = await trigger()
-            console.log(isValid);
             if (data.images.length !== 6) {
-                console.log('err image');
                 setimgErr(true)
             }
             if (isValid && data.images.length === 6) {
-                console.log(activeStep)
-                console.log(data)
                 // setLoading(true)
                 if (isEdit) {
                     swal({
@@ -116,9 +102,6 @@ export default function LinearStepper({ defaultData, isEdit }) {
                             if (willDelete) {
                                 setActiveStep(activeStep + 1)
 
-                                console.log('working');
-                                console.log(data);
-                                console.log('njna urangyalla');
                                 EditHostedProperty(data,defaultData).then(() => {
             
                                     toast.success('Edit  succuesfully.', { autoClose: 500 })
@@ -133,10 +116,8 @@ export default function LinearStepper({ defaultData, isEdit }) {
                             console.log(err);
                         })
                   
-                    console.log('edit');
                 
                 } else {
-                    console.log('working add propert');
                     Addproperty(data, userId).then(() => {
                         // setLoading(false)
                         setActiveStep(activeStep + 1)

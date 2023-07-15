@@ -32,7 +32,6 @@ const StripeCheckout = () => {
           ],
         }),
       }).then((response)=>{
-          console.log(response);
 
           window.location.href = response.data.url
 

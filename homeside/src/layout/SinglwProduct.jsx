@@ -18,10 +18,7 @@ export default function SingleProperty() {
     const [SingleProperty, setSingleProperty] = React.useState({})
     React.useEffect(() => {
         api.get('/getAllproperty').then(({ data }) => {
-            console.log(data)
-            console.log('SINGLE PROPERTY');
             const singleProperty = data.find((item) => item._id == id)
-            console.log(singleProperty);
             setSingleProperty(singleProperty)
 
         })

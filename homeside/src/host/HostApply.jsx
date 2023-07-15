@@ -62,10 +62,8 @@ export default function HostApplyPage() {
     const navigate = useNavigate()
     const name = 'fazmie'
     function Submit(data) {
-        console.log(data);
         SendHostDetails(data,userId)
             .then(() => {
-                console.log('sadsd');
                     dispatch(setHostapplied(true))
             })
             .catch((err) => {

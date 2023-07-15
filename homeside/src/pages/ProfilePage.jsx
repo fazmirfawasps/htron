@@ -13,10 +13,7 @@ function ProfilePage() {
     const userId = useSelector((state) => state.user.id)
     useEffect(() => {
         getUserDetail(userId).then(({ data }) => {
-            console.log(data);
-            console.log(data[0].FullName);
             setpon(data[0].MobileNumber)
-            console.log(data[0].MobileNumber);
 
             setuser(data[0].FullName)
             setemail(data[0].Email)
@@ -30,7 +27,6 @@ function ProfilePage() {
     // useEffect(() => {
     //     getWalletAmt(_id)
     //         .then(({ data }) => {
-    //             console.log(data)
     //             setWallet(data.Wallet)
     //         })
     //         .catch((err) => {

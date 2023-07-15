@@ -50,7 +50,6 @@ export default function BookingCard({ SingleProperty }) {
     function handleChatWithHost() {
 
 
-        console.log('working chat');
         let data = {
             senderid: userid,
             receiverid: SingleProperty.hostid,
@@ -65,7 +64,6 @@ export default function BookingCard({ SingleProperty }) {
     }
 
     function handlecheckout(value) {
-        console.log(SingleProperty.NotAvailable);
         const startDateStartOfDay = startDate.startOf('day')
         const valueStartOfDay = dayjs(value).startOf('day')
         if (startDateStartOfDay.isSame(valueStartOfDay)) {
@@ -84,26 +82,16 @@ export default function BookingCard({ SingleProperty }) {
     function handleReserve() {
         const checkin = handledate(startDate)
         const checkOut = handledate(endDate)
-        console.log(startDate);
         const formattedStartDateToCheck = checkin.slice(2);
         const formattedEndDateToCheck = checkOut.slice(2);
-        console.log('check dates')
-        console.log(formattedEndDateToCheck);
         let totalAmunt
         if (!totalAmount) {
             totalAmunt = SingleProperty.Price
-            console.log('nthann');
-            console.log(totalAmunt);
         }
         else {
-            console.log('preshnm');
             totalAmunt = totalAmount
         }
-        console.log(totalAmount);
-        console.log(checkin);
         if (!SingleProperty.NotAvailable) {
-            console.log(totalAmunt);
-            console.log('WORKING');
             checkout(
                 SingleProperty,
                 checkin,
@@ -113,7 +101,6 @@ export default function BookingCard({ SingleProperty }) {
                 userid
             )
                 .then((response) => {
-                    console.log(response)
                     window.location.href = response.data.url
                     // window.history.pushState(null, null, response.data.url)
                 })
@@ -124,7 +111,6 @@ export default function BookingCard({ SingleProperty }) {
         }
         else {
             if (SingleProperty.NotAvailable.includes(formattedStartDateToCheck) || SingleProperty.NotAvailable.includes(formattedEndDateToCheck)) {
-                console.log('At least one of the dates is not available');
                 swal({
                     title: 'Dates not availablr',
                     text: ` The following dates are not available: ${SingleProperty.NotAvailable.join(', ')}`,
@@ -142,7 +128,6 @@ export default function BookingCard({ SingleProperty }) {
 
                 )
                     .then((response) => {
-                        console.log(response)
                         window.location.href = response.data.url
                     })
                     .catch((err) => {
@@ -153,7 +138,6 @@ export default function BookingCard({ SingleProperty }) {
 
 
     }
-    console.log(SingleProperty.NotAvailable);
     
     
       

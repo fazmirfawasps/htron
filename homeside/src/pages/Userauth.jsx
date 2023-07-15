@@ -5,7 +5,6 @@ import { useSelector } from "react-redux";
 import { ExternalContext } from '../context/CustomContext';
 
 export  default function  Userauth(){
-    console.log('hello');
     const { setShow}=  useContext(ExternalContext)
    
     let logged = useSelector((state) => state.user.id)
@@ -14,7 +13,6 @@ export  default function  Userauth(){
 console.log('working of useeefect in userauth');
         }
         else{
-            console.log('working of useeefect in userauth');
             setShow(true)
   
         }

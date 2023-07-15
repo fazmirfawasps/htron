@@ -23,28 +23,18 @@ export default function Signin(props) {
   //   dispatch(setName('fazmir'))
   //   dispatch(setEmail('laila'))
   //   dispatch(setAddress('hello'))
-  //   console.log(user);
   // }
-  // console.log(user);
-  console.log(props);
   const googlesignin = () => {
     signInWithPopup(auth, googleProvider).then((data) => {
-      console.log(data.user.email);
 
       let email = data.user.email
       api.get('/', { params: { email: data.user.email } }).then(({ data }) => {
-        console.log(data);
         if (data.data) {
           if(data.details[0].block){
             props.errBlock('users is blocked by admin')
           }
           else{
-            console.log('account existed');
-            console.log(data.details[0]._id);
-            console.log('account existed');
   
-            console.log(data.details);
-            console.log('account existed');
   
             dispatch(setId(data.details[0]._id))
             dispatch(setHostapplied(data.details[0].Hostapplied))
@@ -63,7 +53,6 @@ export default function Signin(props) {
           props.ChangeEmail(email)
           props.Changekey(1)
 
-          console.log('userdetails');
         }
       })
       // props.handleModal()

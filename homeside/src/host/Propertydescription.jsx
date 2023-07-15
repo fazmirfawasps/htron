@@ -24,7 +24,6 @@ function Propertydetail() {
     }
 
 
-    console.log(errors)
 
     return (
         <Stack
@@ -85,7 +84,6 @@ function Propertydetail() {
                             inputValue={inputValue}
                             {...field}
                             onChange={(event, newValue) => {
-                                console.log(newValue);
                                 setInputValue(newValue?.place_name || '');
                                 setValue('Address', newValue?.place_name || '');
                             }}

@@ -10,7 +10,6 @@ function CheckoutSuccess() {
     const navigate = useNavigate()
     const [state, setState] = React.useState(false)
     useEffect(() => {
-        console.log('jcdcnkjcfkcn');
       
         const verifyAndSetState = async () => {
           try {

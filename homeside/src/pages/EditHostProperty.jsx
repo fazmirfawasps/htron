@@ -12,12 +12,10 @@ import { ExternalContext } from '../context/CustomContext'
 
 function Editproperty() {
     const { propertyEdit } = useContext(ExternalContext)
-    console.log(propertyEdit);
     const defaultData = propertyEdit
 
 
 
-         console.log('nthoi');
     const isEdit = true
     
     

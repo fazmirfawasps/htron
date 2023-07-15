@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React from 'react'
 
 // import { MuiOtpInput } from 'mui-one-time-password-input'
@@ -37,8 +38,7 @@ import { setId, setHostapplied, setVerified } from '../../redux/redux';
 
 
 
-export default function Basepart({ key, Changekey, ChangeEmail, handleClose }) {
-    console.log(key);
+export default function Basepart({ Changekey, ChangeEmail, handleClose }) {
     const dispatch = useDispatch()
     const [timeRemaining, setTimeRemaining] = useState();
     const [user, setUser] = useState({})
@@ -65,7 +65,6 @@ export default function Basepart({ key, Changekey, ChangeEmail, handleClose }) {
 
 
     const handlePhoneNumberChange = (value,) => {
-        console.log(value);
         setPhoneNumber(value);
     }
 
@@ -85,13 +84,9 @@ const errBlock=(value)=>{
         try {
             const recaptchaVerifier = await new RecaptchaVerifier('recaptcha', {}, auth)
             const mob = '+' + phoneNumber
-            console.log(mob);
             setformatedMobno(mob.replace(/(\+\d{2})(\d+)(\d{4})/, "$1******$3"))
             const confirmation = await signInWithPhoneNumber(auth, mob, recaptchaVerifier)
-            console.log('working');
             setshowotp(!showotp)
-            console.log(user);
-            console.log(confirmation);
             setConfirm(confirmation)
             setTimeRemaining(60);
 
@@ -108,11 +103,8 @@ const errBlock=(value)=>{
         let numberString = number.toString();
         let resultString = numberString.substring(2);
         let result = parseInt(resultString, 10);
-        console.log(result);
 
         CheckMobNo(result).then(({ data }) => {
-            console.log('otp dataa');
-            console.log(data);
             if (data) {
                 if (!data[0].block) {
                     sentotp(mob)
@@ -127,7 +119,6 @@ const errBlock=(value)=>{
             }
             else {
                 setMoberror('Mobile number  not existed')
-                console.log('num not existed');
             }
         })
     }
@@ -142,10 +133,7 @@ const errBlock=(value)=>{
                 callback: () => { },
             }, auth)
             const mob = '+' + phoneNumber
-            console.log(mob);
             const confirmation = await signInWithPhoneNumber(auth, mob, recaptchaVerifier)
-            console.log('working');
-            console.log(confirmation);
             setConfirm(confirmation)
             setTimeRemaining(60);
         } catch (err) {
@@ -156,11 +144,8 @@ const errBlock=(value)=>{
 
 
     const otpconfirm = (code) => {
-        console.log(code);
         confirm.confirm(code).then((result) => {
             handleClose()
-            console.log(result);
-            console.log('working otp succes');
             setOtperror('');
 
             dispatch(setId(user._id))
@@ -171,7 +156,6 @@ const errBlock=(value)=>{
         }).catch((error) => {
             // User couldn't sign in (bad verification code?)
             setOtperror('incorrect otp');
-            console.log(error);
             // ...
         });
 
@@ -183,7 +167,6 @@ const errBlock=(value)=>{
 
         // Check if the OTP code has reached 6 digits
         if (code.length === 6) {
-            console.log(code);
             // Call your desired function here
             otpconfirm(code)
 

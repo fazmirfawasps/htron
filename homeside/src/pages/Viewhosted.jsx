@@ -26,12 +26,9 @@ export default function Viewhosted() {
     const dispatch = useDispatch()
     const [hostedProperty, setHostedproperty] = useState([])
     const { setPropertyEdit } = useContext(ExternalContext)
-    console.log(id);
 
     useEffect(() => {
         GetHostedProperty(id).then(({ data }) => {
-            console.log(data);
-            console.log('itth work avand');
             setHostedproperty(data)
         })
     }, [change])
@@ -39,16 +36,13 @@ export default function Viewhosted() {
         GetAllProperty().then(({ data }) => {
 
 
-            console.log(id);
             const isHosted = data.find((item) => item.hostid === id)
             if (isHosted) {
-                console.log('TRUE BOOLEAN');
                 dispatch(setIshosted(true))
 
             }
             else {
                 dispatch(setIshosted(false))
-                console.log('false BOOLEAN');
 
             }
         })
@@ -63,11 +57,9 @@ export default function Viewhosted() {
     // const { setPropertyEdit } = useContext(ExternalContext)
     function editProperty(id) {
         let PropertyToedit = hostedProperty?.find((item) => item._id == id)
-        console.log(PropertyToedit);
         // for (var i = 0; i < PropertyToedit.length; i++) {
         //     PropertyToedit[i].vehicleType = PropertyToedit[i].VehicleType;
         //     delete PropertyToedit[i].PropertyToedit .images = PropertyToedit.imageFilenames;;
-        //     console.log('DONE');
         //   }
         PropertyToedit.images = PropertyToedit.imageFilenames;
         PropertyToedit.vehicleType = PropertyToedit.VehicleType;
@@ -76,16 +68,13 @@ export default function Viewhosted() {
 
 
         setPropertyEdit(PropertyToedit)
-        console.log(PropertyToedit);
         navigate(`/Edit-listed-property/${id}`)
     }
 
     function removeProperty(id) {
         deleteProperty(id)
-            .then(({ data }) => {
-                console.log('ithum checked');
+            .then(() => {
                 setChange(!change)
-                console.log(data);
             })
             .catch((err) => alert(err))
     }

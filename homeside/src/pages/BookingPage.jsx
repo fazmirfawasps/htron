@@ -16,7 +16,6 @@ function BookingPage() {
     const [order, setOrder] = React.useState([])
     const [change, setChange] = React.useState(false)
     function Cancel(id) {
-        console.log(id);
         swal({
             title: 'Are you sure?',
             text: 'This action cannot be undone!',
@@ -27,7 +26,6 @@ function BookingPage() {
             .then((willDelete) => {
 
                 if (willDelete) {
-                    console.log('working');
                     Cancelorder(id).then(() => {
                         setChange(!change)
                     })
@@ -43,7 +41,6 @@ function BookingPage() {
         backgroundColor: '#d4213f'
     }
     useEffect(() => {
-        console.log(userid);
         getUserOrders(userid).then(({ data }) => {
             const datas = data.map((item) => ({
                 ...item,

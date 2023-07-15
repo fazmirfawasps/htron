@@ -21,7 +21,6 @@ export default function Basic({ name, phoneNumber, email,callBack }) {
     const [edit, setEdit] = useState(false)
     // const [Name, setName] = useState(name)
     // const [Email, setEmail] = useState(email)
-    console.log(name);
     // const [mob, setmob] = useState(phoneNumber)
     const {
         handleSubmit,
@@ -29,7 +28,6 @@ export default function Basic({ name, phoneNumber, email,callBack }) {
         formState: { errors },
         // setError,
     } = useForm()
-    // console.log(mob);
     function change() {
         setEdit(!edit)
     }

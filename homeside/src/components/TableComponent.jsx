@@ -36,7 +36,6 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 }));
 
 export default function CustomizedTables({ Data }) {
-  console.log(Data);
 
   const columns = [];
 
@@ -49,10 +48,8 @@ export default function CustomizedTables({ Data }) {
   };
 
   for (const key in Data[0]) {
-    console.log(key);
     columns.push(key); // "a", "b", "c"
   }
-  console.log(columns);
 
   return (
     <TableContainer component={Paper} sx={{marginTop:2}}>

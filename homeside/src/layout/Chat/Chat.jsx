@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React, { useEffect, useState, useRef } from 'react';
 import io from 'socket.io-client'
 import {
@@ -40,7 +41,7 @@ function Chat() {
   }])
 
   useEffect(() => {
-    socket.current = io('https://htron.site' , { path: '/api/socket.io/'})
+    socket.current = io('https://htron.site', { path: '/api/socket.io/' })
 
   }, [])
 
@@ -52,8 +53,7 @@ function Chat() {
   }, [arrivalMessage, chatData])
   useEffect(() => {
     socket.current?.emit('adduser', userid)
-    socket.current?.on('getuser', (users) => {
-      console.log(users)
+    socket.current?.on('getuser', () => {
     })
   }, [userid])
   useEffect(() => {
@@ -63,7 +63,6 @@ function Chat() {
   }, [arrivalMessage])
   useEffect(() => {
     socket.current.on('getMessage', (data) => {
-      console.log(data)
       setArrivalMessage({
         senderid: data.senderid,
         text: data.text,
@@ -71,24 +70,23 @@ function Chat() {
       })
     })
   }, [])
-  console.log(notification);
-  const groupObjectsById = (arr) => {
-    return arr.reduce((groupedObjects, obj) => {
-      const id = obj.senderid;
-      if (groupedObjects[id]) {
-        groupedObjects[id].count++;
-      } else {
-        groupedObjects[id] = {
-          objects: [obj],
-          count: 1
-        };
-      }
-      return groupedObjects;
-    }, {});
-  };
+  // const groupObjectsById = (arr) => {
+  //   return arr.reduce((groupedObjects, obj) => {
+  //     const id = obj.senderid;
+  //     if (groupedObjects[id]) {
+  //       groupedObjects[id].count++;
+  //     } else {
+  //       groupedObjects[id] = {
+  //         objects: [obj],
+  //         count: 1
+  //       };
+  //     }
+  //     return groupedObjects;
+  //   }, {});
+  // };
 
-  const groupedById = groupObjectsById(notification);
-  console.log(groupedById);
+  // const groupedById = groupObjectsById(notification);
+  // console.log(groupedById);
   useEffect(() => {
     if (chatRef.current) {
       chatRef.current.scrollIntoView({ behavior: 'smooth' })
@@ -382,7 +380,7 @@ function Chat() {
           boxShadow: 5,
         }}
       >
-        <Grid  Container>
+        <Grid Container>
           {show ? <Grid item xs={12} sm={12} lg={4}>
             <Box
               sx={{
@@ -442,27 +440,27 @@ function Chat() {
                     justifyContent: 'center',
                     width: '36px',
                     height: '56px',
-                   
+
                   }}
                   onClick={() => setShow(true)}>
                   <ArrowBackIcon />
                 </Box>
-                <Box   sx={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                   
-                   
-                  }}>
+                <Box sx={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+
+
+                }}>
                   <Avatar {...stringAvatar(receiver.receiverName)} />
                 </Box>
-                <Box   sx={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                   
-                   
-                  }}>
+                <Box sx={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+
+
+                }}>
                   <Typography p={1} color={'#3b71ca'} fontWeight={600} variant="inherit">
                     {receiver.receiverName}
                   </Typography>

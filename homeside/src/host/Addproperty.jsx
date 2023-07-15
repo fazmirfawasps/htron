@@ -21,7 +21,6 @@ function AddpropertyType() {
 
   useEffect(()=>{
   VehicleType().then(({data})=>{
-    console.log(data);
     setData(data)
   })
   },[])
@@ -41,7 +40,6 @@ function AddpropertyType() {
   }
   const [vehicleType, setvehicleType] = React.useState('')
   const handleChange = (event) => {
-    console.log(event.target.value)
     setvehicleType(event.target.value)
   }
 

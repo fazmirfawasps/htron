@@ -16,8 +16,6 @@ export default function WishList(){
 
 useEffect(()=>{
     getWishlist(userId).then(({ data }) => {
-        console.log(data);
-        console.log('wishlist kiitti');
        
           setWishlist(data)
 
