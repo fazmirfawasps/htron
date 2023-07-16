@@ -20,6 +20,9 @@ import ChatUser from './Chatuser';
 import useMediaQuery from '@mui/material/useMediaQuery'
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import swal from 'sweetalert';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 function Chat() {
 
@@ -34,11 +37,9 @@ function Chat() {
   const userid = useSelector((state) => state.user.id)
   const matches = useMediaQuery('(min-width:600px)')
   const [show, setShow] = useState(true)
-  const [notification, setNotification] = useState([{
-    senderid: '123',
-    text: 'hello',
-    createdAt: Date.now(),
-  }])
+  const [onlineuser, setOnlineuser] = useState([])
+
+
 
   useEffect(() => {
     socket.current = io('https://htron.site', { path: '/api/socket.io/' })
@@ -53,16 +54,24 @@ function Chat() {
   }, [arrivalMessage, chatData])
   useEffect(() => {
     socket.current?.emit('adduser', userid)
-    socket.current?.on('getuser', () => {
+    socket.current?.on('getuser', (users) => {
+      setOnlineuser(users)
+
     })
   }, [userid])
-  useEffect(() => {
-    if (arrivalMessage) {
-      setNotification((prev) => [...prev, arrivalMessage])
-    }
-  }, [arrivalMessage])
+
   useEffect(() => {
     socket.current.on('getMessage', (data) => {
+      toast(`🦄 ${data.name} sent a message`, {
+        position: "top-center",
+        autoClose: 1000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
       setArrivalMessage({
         senderid: data.senderid,
         text: data.text,
@@ -96,13 +105,21 @@ function Chat() {
     const getchatuser = async () => {
       try {
         const { data } = await getconversation(userid)
-        setChatData(data)
+        const online = data.map(obj1 => {
+          const matchedObj = onlineuser.find(obj2 => obj2.userid === obj1.receiverid);
+          if (matchedObj) {
+            return { ...obj1, online: true };
+          }
+
+          return { ...obj1, online: false };
+        });
+        setChatData(online)
       } catch (err) {
         alert(err)
       }
     }
     getchatuser()
-  }, [userid])
+  }, [userid, onlineuser])
   useEffect(() => {
     const getCurrentMessage = async () => {
       try {
@@ -136,6 +153,15 @@ function Chat() {
     }
     return false
   }
+  function getReceivername() {
+    if (currentchat) {
+      const data = chatData.find(
+        (item) => item.conversationid === currentchat
+      )
+      return data.receiverName
+    }
+    return false
+  }
   const handlesubmit = () => {
     const message = {
       conversationid: currentchat,
@@ -148,6 +174,7 @@ function Chat() {
     socket.current.emit('sendMessage', {
       senderid: userid,
       receiverid: getReceiverid(),
+      name: getReceivername(),
       text: NewMessage,
 
     })
@@ -541,6 +568,19 @@ function Chat() {
         </Grid>
       </Card>
     </Box>}
+    <ToastContainer
+      position="top-center"
+      autoClose={1000}
+      hideProgressBar={false}
+      newestOnTop={false}
+      closeOnClick
+      rtl={false}
+      pauseOnFocusLoss
+      draggable
+      pauseOnHover
+      theme="light"
+    />
+
 
   </>
   )

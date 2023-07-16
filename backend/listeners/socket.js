@@ -1,5 +1,5 @@
 const socketIO = require('socket.io');
-const { adduser, user, getReceiver, RemoveUser } = require("./EmitterChat");
+const { adduser, user, getReceiver, RemoveUser,Getuser } = require("./EmitterChat");
 
 module.exports = function(server) {
   const io = socketIO(server,{
@@ -26,10 +26,11 @@ module.exports = function(server) {
     socket.on("adduser", (userid) => {
       adduser(userid, socket.id)
       console.log(user)
-        io.emit('getuser',user)
+      const users = Getuser()
+        io.emit('getuser',users)
       });
     
-    socket.on('sendMessage', ({ senderid, receiverid, text }) => {
+    socket.on('sendMessage', ({ senderid, receiverid,name, text }) => {
       console.log('messahe working');
       console.log(text);
       console.log(receiverid);
@@ -39,7 +40,8 @@ module.exports = function(server) {
       if (receiver) {
         io.to(receiver?.socketid).emit('getMessage', {
           senderid,
-          text
+          text,
+          name
         })
       }
     })

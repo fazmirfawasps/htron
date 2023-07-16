@@ -16,5 +16,8 @@ module.exports = {
         user = user.filter(user => user.socketid !== socketid)
         console.log(user);
     }
-    , user
+    , user,
+    Getuser:()=>{
+        return user
+    }
 }
