@@ -58,11 +58,22 @@ function ChatUser({ data, currentchat }) {
                             fontWeight={600}
                             variant="inherit"
                         >
-                            {data.receiverName}
+                            {data.receiverName} <span>  {data.online ? <div style={{
+                                display: 'inline - block',
+                                width: '5px', /* Adjust the size as needed */
+                                height: '5px',/* Adjust the size as needed */
+                                backgroundColor: 'red',
+                                borderRadius: '50%'
+                            }}>
+
+
+                            </div> : ''}</span>
                         </Typography>
+
+
                     </Box>
                 </Box>
-            </Box>
+            </Box >
             <Divider />
         </>
     )
