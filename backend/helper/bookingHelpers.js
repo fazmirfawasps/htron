@@ -140,7 +140,7 @@ module.exports = {
   getAllorders: () => {
     return new Promise(async (resolve, reject) => {
       console.log();
-      const orders = await db.get().collection('Booking').aggregate([
+      let orders = await db.get().collection('Booking').aggregate([
         { $match: {  } },
         {
           $lookup: {
@@ -169,6 +169,7 @@ module.exports = {
             OrderStatus: 1,
             checkin: 1,
             checkOut: 1,
+            hostid:1,
             createdAt: 1,
             propertyName: "$Property.PropertyName",
             address: "$Property.Address",
@@ -213,6 +214,7 @@ module.exports = {
             PropertyAddress: 1,
             Image: 1,
             Action: 1,
+            hostid:1
           },
         },
         { $sort: { createdAt: -1 } }

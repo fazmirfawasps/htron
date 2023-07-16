@@ -17,8 +17,6 @@ const Booking = () => {
         bgcolor: 'red',
     }
     function Cancel(hostid,price,orderid) {
-        console.log(orderid);
-        console.log(price);
         swal({
             title: 'Are you sure?',
             text: 'This action cannot be undone!',
