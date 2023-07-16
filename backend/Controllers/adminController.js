@@ -247,13 +247,14 @@ const adminController = {
 },
 
 CancelBooking:async(req,res)=>{
-    console.log(req.params.orderid)
-    console.log('cancel booking admin sid');
     try{
-        bookingHelpers.cancelBooking(req.params.orderid).then(()=>{
-            res.status(200).json()
-    
+        bookingHelpers.refundBooking(req.params.orderid).then(()=>{
+            adminHelpers.Refund(req.params.hostid, req.params.orderprice).then(()=>{
+                res.status(200).json()
+        
+            })
         })
+    
     }
     catch(err){
         console.log(err);

@@ -9,7 +9,8 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import useMediaQuery from '@mui/material/useMediaQuery'
 
-export default function Basic({ name, phoneNumber, email,callBack }) {
+
+export default function Basic({ name, phoneNumber, email,wallet,callBack }) {
     const ProfileField = styled(TextField)(({ theme }) => ({
         margin: theme.spacing(1),
     }))
@@ -21,6 +22,7 @@ export default function Basic({ name, phoneNumber, email,callBack }) {
     const [edit, setEdit] = useState(false)
     // const [Name, setName] = useState(name)
     // const [Email, setEmail] = useState(email)
+    console.log(name);
     // const [mob, setmob] = useState(phoneNumber)
     const {
         handleSubmit,
@@ -28,6 +30,7 @@ export default function Basic({ name, phoneNumber, email,callBack }) {
         formState: { errors },
         // setError,
     } = useForm()
+    // console.log(mob);
     function change() {
         setEdit(!edit)
     }
@@ -65,6 +68,7 @@ export default function Basic({ name, phoneNumber, email,callBack }) {
                         <Grid item md={12} lg={12} xl={12} className="mt-5">
                             <Card style={{ borderRadius: '15px' }}>
                                 <CardContent>
+
                                     <Box display="flex" color="black">
                                         <Box flexShrink={0}>
                                             <CardMedia
@@ -78,6 +82,7 @@ export default function Basic({ name, phoneNumber, email,callBack }) {
 
                                             </Box>
                                         </Box>
+
                                         <form onSubmit={handleSubmit(Submit)}>
 
                                             <Box flexGrow={1} marginLeft={3}>
@@ -92,7 +97,7 @@ export default function Basic({ name, phoneNumber, email,callBack }) {
                                                             Wallet
                                                         </Typography>
                                                         <Typography variant="body1">
-                                                            Balance: ₹ 2500
+                                                            Balance: ₹{wallet}
                                                         </Typography>
                                                     </Box>
                                                 </Box>

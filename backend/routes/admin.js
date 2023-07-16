@@ -17,8 +17,8 @@ router.post('/getAHostdetail',adminController.authenticateToken, adminController
 router.post('/verifyHostdetail', adminController.authenticateToken,adminController.verifyHostdetail);
 router.get('/getallorder',adminController.getallOrders)
 router.get('/dashboard',adminController.getallDashboard)
+router.patch('/Cancelbooking/:hostid/:orderprice/:orderid',adminController.CancelBooking)
 
-router.patch('/Cancelbooking/:orderid',adminController.CancelBooking)
 router.delete('/removeProperty/:id',adminController.authenticateToken, adminController.deleteProperty);
 
 // router.get('/dout', adminController.dout);

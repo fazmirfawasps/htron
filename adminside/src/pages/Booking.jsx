@@ -16,41 +16,45 @@ const Booking = () => {
     const style = {
         bgcolor: 'red',
     }
-    function Cancel(orderid) {
+    function Cancel(hostid,price,orderid) {
+        console.log(orderid);
+        console.log(price);
         swal({
             title: 'Are you sure?',
             text: 'This action cannot be undone!',
             icon: 'warning',
-            buttons: ['Cancel', 'Delete'],
+            buttons: ['Cancel', 'Refund'],
             dangerMode: true,
         })
             .then((willDelete) => {
 
                 if (willDelete) {
-                    api.patch(`/admin/Cancelbooking/${orderid}`).then(() => {
+                    console.log('working');
+                    api.patch(`/admin/Cancelbooking/${hostid}/${price}/${orderid}`).then(() => {
                         setChange(!change)
                     })
 
                 }
             }).catch((err) => {
-                console.log(err)
+                console.log(err);
             })
 
 
     }
     useEffect(() => {
+        console.log();
         api.get('/admin/getallorder').then(({ data }) => {
             const datas = data.map((item) => ({
                 ...item,
-                Image: <img src={`http://htron.site/api/images/${item.Image}`} style={{ width: '50px' }}></img>,
-                Action: item.OrderStatus === "Booking Cancelled" ? "" : <BtnComponent
+                Image: <img src={`http://localhost:7000/images/${item.Image}`} style={{ width: '50px' }}></img>,
+                Action: item.OrderStatus === "Booking Cancelled" ?  <BtnComponent
                     variant={'contained'}
                     callback={() => {
-                        Cancel(item._id)
+                        Cancel(item.hostid,item.TotalAmount,item._id)
                     }}
-                    content={'Canel'}
+                    content={'Refund'}
                     style={style}
-                />
+                />:''
 
             }))
 

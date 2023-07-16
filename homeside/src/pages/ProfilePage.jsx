@@ -7,6 +7,8 @@ function ProfilePage() {
     const [phonenumber, setpon] = useState('')
     const [email, setemail] = useState('')
     const [change, setChange] = useState(false)
+    const [wallet, setWallet] = useState(0)
+
     const Changeeffect = () => {
         setChange(!change)
     }
@@ -17,22 +19,15 @@ function ProfilePage() {
 
             setuser(data[0].FullName)
             setemail(data[0].Email)
+            if(data[0].Wallet){
+                setWallet(data[0].Wallet)
+            }
 
         }).catch((err) => {
             console.log(err);
         })
     }, [change])
     const address = 'palatskdsndk'
-    // const [wallet, setWallet] = useState(0)
-    // useEffect(() => {
-    //     getWalletAmt(_id)
-    //         .then(({ data }) => {
-    //             setWallet(data.Wallet)
-    //         })
-    //         .catch((err) => {
-    //             alert(err)
-    //         })
-    // }, [])
 
     return (
         <Profile
@@ -40,7 +35,7 @@ function ProfilePage() {
             phoneNumber={phonenumber}
             email={email}
             Address={address}
-            // wallet={wallet}
+            wallet={wallet}
             callBack={Changeeffect}
         />
     )
