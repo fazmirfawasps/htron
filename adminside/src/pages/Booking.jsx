@@ -42,11 +42,10 @@ const Booking = () => {
 
     }
     useEffect(() => {
-        console.log();
         api.get('/admin/getallorder').then(({ data }) => {
             const datas = data.map((item) => ({
                 ...item,
-                Image: <img src={`http://localhost:7000/images/${item.Image}`} style={{ width: '50px' }}></img>,
+                Image: <img src={`http://htron.site/api/images/${item.Image}`} style={{ width: '50px' }}></img>,
                 Action: item.OrderStatus === "Booking Cancelled" ?  <BtnComponent
                     variant={'contained'}
                     callback={() => {
