@@ -45,7 +45,7 @@ function BookingPage() {
             const datas = data.map((item) => ({
                 ...item,
                 Image: <img src={`http://htron.site/api/images/${item.Image}`} style={{ width: '50px' }}></img>,
-                Action: item.OrderStatus === "Booking Cancelled" ? "" : <BtnComponent
+                Action: item.OrderStatus == "Booking Cancelled"||item.OrderStatus === "Refunded"? "" : <BtnComponent
                     variant={'contained'}
                     callback={() => {
                         Cancel(item._id)
