@@ -72,21 +72,22 @@ module.exports = {
         })
 
     },
-    refundBooking: (id) => {
+    Refund : (id,totalprice)=>{
+            
+        const numericTotalPrice = parseInt(totalprice);
         return new Promise((resolve, reject) => {
-    
-          db.get().collection('Booking').updateOne(
-            { _id: new ObjectId(id) },
-            {
-              $set: {
-                OrderStatus: "Refunded",
-              },
-            }
-          )
-          resolve()
-    
+            db.get().collection('user').updateOne(
+                { _id: new ObjectId (id) },
+                { $inc: { Wallet: numericTotalPrice } }
+              
+            ).then((response) => {
+                console.log(response)
+                resolve()
+            })
+
+
         })
-      },
+    },
     GetAllProperty: () => {
 
         console.log('whowwww');
