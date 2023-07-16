@@ -133,6 +133,21 @@ function Chat() {
       getCurrentMessage()
     }
   }, [currentchat])
+  useEffect(() => {
+    socket.current.on('blockuser', () => {
+      console.log('bocking user working in back end');
+      swal({
+        title: 'Are you sure?',
+        text: 'This action cannot be undone!',
+        icon: 'warning',
+        button: 'OK',
+        dangerMode: true,
+      }).then(() => {
+        // User clicked the "OK" button
+        // Perform your desired action here
+      });
+    })
+  }, [])
   function checkcurrentChat(senderid) {
     if (currentchat) {
       const data = chatData.find(
