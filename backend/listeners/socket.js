@@ -45,5 +45,13 @@ module.exports = function(server) {
         })
       }
     })
+    socket.on("block", ({userid,text}) => {
+      console.log(text);
+      const receiver = getReceiver(userid)
+       console.log(receiver);
+       if (receiver) {
+         io.to(receiver?.socketid).emit('blockuser',user)
+       }
+       });
   });
 };
