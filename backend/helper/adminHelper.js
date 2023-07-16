@@ -72,6 +72,21 @@ module.exports = {
         })
 
     },
+    refundBooking: (id) => {
+        return new Promise((resolve, reject) => {
+    
+          db.get().collection('Booking').updateOne(
+            { _id: new ObjectId(id) },
+            {
+              $set: {
+                OrderStatus: "Refunded",
+              },
+            }
+          )
+          resolve()
+    
+        })
+      },
     GetAllProperty: () => {
 
         console.log('whowwww');

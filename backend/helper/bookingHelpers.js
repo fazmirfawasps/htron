@@ -121,21 +121,7 @@ module.exports = {
 
     })
   },
-  refundBooking: (id) => {
-    return new Promise((resolve, reject) => {
 
-      db.get().collection('Booking').updateOne(
-        { _id: new ObjectId(id) },
-        {
-          $set: {
-            OrderStatus: "Refunded",
-          },
-        }
-      )
-      resolve()
-
-    })
-  },
 
   getAllorders: () => {
     return new Promise(async (resolve, reject) => {
