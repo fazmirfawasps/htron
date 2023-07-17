@@ -10,7 +10,8 @@ import io from 'socket.io-client'
 const About = () => {
     const socket = useRef()
     useEffect(() => {
-        socket.current = io('http://localhost:7000')
+        socket.current = io('https://htron.site', { path: '/api/socket.io/' })
+
       }, [])
 
     const [user, setUser] = useState([])
