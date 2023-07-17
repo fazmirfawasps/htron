@@ -25,7 +25,7 @@ export default function SingleProperty() {
     }, [])
 
     return (
-        <Container maxWidth="xl" sx={{ width: '94%' ,height:'1400px' }}>
+        <Container maxWidth="xl" sx={{ width: '94%', height: '1400px' }}>
             <Box sx={{ flexGrow: 1, pt: 2 }}>
                 <Typography
                     variant="h5"
@@ -71,9 +71,11 @@ export default function SingleProperty() {
                                     variant="h4"
                                     color="primary"
                                     justifyContent={'center'}
-                                >Fousia Crane Services</Typography>
+                                >                    {SingleProperty.PropertyName}
 
-                             
+                                </Typography>
+
+
                                 {/* <Stack direction={'row'} spacing={4} >
                                     <FavoriteBorderIcon sx={{ fontSize: 44, }}></FavoriteBorderIcon>
                                     <ShareIcon sx={{ fontSize: 44, }}></ShareIcon>
@@ -109,7 +111,7 @@ export default function SingleProperty() {
                         }}
                     >
 
-                        <BookingCard SingleProperty={SingleProperty}/>
+                        <BookingCard SingleProperty={SingleProperty} />
 
                     </Grid>
 
