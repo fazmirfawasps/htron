@@ -16,11 +16,9 @@ const { use } = require('../routes');
 
 // Handle GET / route
 exports.getIndex = (req, res, next) => {
-    console.log(req.query);
 
     try {
         if (req.query.email) {
-            console.log('working user /side');
 
             userHelper.addUser(req.query)
                 .then((response) => {

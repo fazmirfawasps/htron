@@ -21,7 +21,6 @@ module.exports = {
 
   getOrders: (id) => {
     return new Promise(async (resolve, reject) => {
-      console.log(id);
       const orders = await db.get().collection('Booking').aggregate([
         { $match: { userid: id } },
         {
@@ -98,7 +97,6 @@ module.exports = {
         },
         { $sort: { createdAt: -1 } }
       ]).toArray();
-      console.log(orders);
       resolve(orders)
     })
 
@@ -140,7 +138,6 @@ module.exports = {
 
   getAllorders: () => {
     return new Promise(async (resolve, reject) => {
-      console.log();
       let orders = await db.get().collection('Booking').aggregate([
         { $match: {  } },
         {
@@ -220,7 +217,6 @@ module.exports = {
         },
         { $sort: { createdAt: -1 } }
       ]).toArray();
-      console.log(orders);
       resolve(orders)
     })
 

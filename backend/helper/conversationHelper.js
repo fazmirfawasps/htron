@@ -7,7 +7,6 @@ module.exports={
             new ObjectId(data.senderid),
             new ObjectId(data.receiverid),
           ]
-          console.log(conversation);
     return new Promise(async (resolve, reject) => {
       const findIfExsist = await db.get().collection('Converstaions').findOne({conversation:{$all:[new ObjectId(data.senderid),new ObjectId(data.receiverid)]}})
             if (!findIfExsist) {
