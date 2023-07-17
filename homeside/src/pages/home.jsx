@@ -55,12 +55,15 @@ export default function Home() {
               setProperty(newArray);
             })
             .catch(() => {
-              navigate('/E')
             });
         } else {
           setProperty(propertyData);
         }
       })
+      .catch(() => {
+        navigate('/error')
+      })
+
       .finally(() => {
         setLoading(false);
       });
