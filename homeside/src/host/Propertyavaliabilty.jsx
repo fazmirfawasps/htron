@@ -89,7 +89,7 @@ function PropertyAvailable() {
         // </Box>
         <Box component="div" sx={{ minHeight: '50vh', marginTop: '20px' }}>
             <Typography variant="h4" m={1} maxWidth={350} ml={5}>
-                What kind of vehicle will you host?
+                Is your vehicle available right now?
             </Typography>
 
 
