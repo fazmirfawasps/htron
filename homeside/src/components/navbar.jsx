@@ -23,6 +23,8 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import styled from 'styled-components';
 import { Verified } from '@mui/icons-material';
+import socket from '../layout/Chat/Socket';
+import swal from 'sweetalert';
 
 const StyledIcon = styled(Verified)`
   color: primary;
@@ -98,7 +100,26 @@ function ResponsiveAppBar() {
   //   })
   // }
   const userId = useSelector((state) => state.user.id)
+  useEffect(() => {
+    socket.current?.emit('adduser', userId)
+   
 
+
+  }, [userId])
+  useEffect(() => {
+    socket.current.on('blockuser', () => {
+      console.log('bocking user working in back end');
+      swal({
+        title: '  Warning?',
+        text: 'you are blocked by admin!',
+        icon: 'warning',
+        button: 'OK',
+        dangerMode: true,
+      }).then(() => {
+    logout()
+      });
+    })
+  }, [])
 
 
   const [anchorElNav, setAnchorElNav] = React.useState(null);

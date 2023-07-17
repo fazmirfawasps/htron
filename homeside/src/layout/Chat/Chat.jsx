@@ -22,7 +22,7 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import swal from 'sweetalert';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
+import socket from './Socket';
 
 function Chat() {
 
@@ -32,7 +32,6 @@ function Chat() {
   const [NewMessage, setNewMessage] = useState('')
   const [arrivalMessage, setArrivalMessage] = useState(null)
   const [receiver, setReceiver] = useState('')
-  const socket = useRef()
   const chatRef = useRef()
   const userid = useSelector((state) => state.user.id)
   const matches = useMediaQuery('(min-width:600px)')
@@ -41,10 +40,7 @@ function Chat() {
 
 
 
-  useEffect(() => {
-    socket.current = io('https://htron.site', { path: '/api/socket.io/' })
 
-  }, [])
 
   useEffect(() => {
 
@@ -133,21 +129,7 @@ function Chat() {
       getCurrentMessage()
     }
   }, [currentchat])
-  useEffect(() => {
-    socket.current.on('blockuser', () => {
-      console.log('bocking user working in back end');
-      swal({
-        title: 'Are you sure?',
-        text: 'This action cannot be undone!',
-        icon: 'warning',
-        button: 'OK',
-        dangerMode: true,
-      }).then(() => {
-        // User clicked the "OK" button
-        // Perform your desired action here
-      });
-    })
-  }, [])
+
   function checkcurrentChat(senderid) {
     if (currentchat) {
       const data = chatData.find(
