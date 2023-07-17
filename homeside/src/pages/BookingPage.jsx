@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React from 'react'
 import { Container } from '@mui/material'
 
@@ -12,7 +13,7 @@ function BookingPage() {
 
 
     const userid = useSelector((state) => state.user.id)
-
+    const today = new Date()
     const [order, setOrder] = React.useState([])
     const [change, setChange] = React.useState(false)
     function Cancel(id) {
@@ -34,7 +35,7 @@ function BookingPage() {
             }).catch((err) => {
                 console.log(err);
             })
-     
+
 
     }
     const style = {
@@ -45,7 +46,7 @@ function BookingPage() {
             const datas = data.map((item) => ({
                 ...item,
                 Image: <img src={`http://htron.site/api/images/${item.Image}`} style={{ width: '50px' }}></img>,
-                Action: item.OrderStatus == "Booking Cancelled"||item.OrderStatus === "Refunded"? "" : <BtnComponent
+                Action: item.OrderStatus == "Booking Cancelled" || item.OrderStatus === "Refunded" ? "" : <BtnComponent
                     variant={'contained'}
                     callback={() => {
                         Cancel(item._id)
@@ -55,6 +56,8 @@ function BookingPage() {
                 />
 
             }))
+           
+           
 
             setOrder(datas)
         })
