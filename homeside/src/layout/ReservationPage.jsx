@@ -165,7 +165,6 @@ export default function BasicTabs() {
 
                 return({
                 ...item,
-                Image: <img src={`http://htron.site/api/images/${item.Image}`} style={{ width: '50px' }}></img>,
                 Action: item.OrderStatus == "Booking Cancelled" || item.OrderStatus === "Refunded"||checkoutDate<today ? "" : <BtnComponent
                     variant={'contained'}
                     callback={() => {
