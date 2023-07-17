@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import * as React from 'react';
 import PropTypes from 'prop-types';
 import Tabs from '@mui/material/Tabs';
@@ -169,7 +170,7 @@ export default function BasicTabs() {
                         <Tab label="Past" {...a11yProps(0)} />
                         <Tab label="Today" {...a11yProps(1)} />
                         <Tab label="Upcoming" {...a11yProps(2)} />
-                        <Tab label="All" {...a11yProps(3)} />
+                        {/* <Tab label="All" {...a11yProps(3)} /> */}
 
                     </Tabs>
                 </Box>
@@ -185,9 +186,9 @@ export default function BasicTabs() {
                     <TableComponent Data={upcomeOrders}></TableComponent>
 
                 </TabPanel>
-                <TabPanel value={value} index={3}>
+                {/* <TabPanel value={value} index={3}>
                     <TableComponent Data={order}></TableComponent>
-                </TabPanel>
+                </TabPanel> */}
             </Box>
         </Box>
     );
