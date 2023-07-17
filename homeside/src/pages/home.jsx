@@ -54,7 +54,9 @@ export default function Home() {
               });
               setProperty(newArray);
             })
-            .catch(() => {});
+            .catch(() => {
+              navigate('/E')
+            });
         } else {
           setProperty(propertyData);
         }
