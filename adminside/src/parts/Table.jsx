@@ -36,7 +36,7 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 
 export default function CustomizedTables({ Data }) {
   const [page, setPage] = useState(0);
-  const [rowsPerPage, setRowsPerPage] = useState(5);
+  const [rowsPerPage, setRowsPerPage] = useState(10);
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -55,8 +55,8 @@ export default function CustomizedTables({ Data }) {
     event.target.title = '';
   };
 
-  const emptyRows =
-    rowsPerPage - Math.min(rowsPerPage, (Data?.length || 0) - page * rowsPerPage);
+  // const emptyRows =
+  //   rowsPerPage - Math.min(rowsPerPage, (Data?.length || 0) - page * rowsPerPage);
 
   const columns = Object.keys(Data?.[0] || {});
 
@@ -101,17 +101,17 @@ export default function CustomizedTables({ Data }) {
               ))}
             </StyledTableRow>
           ))}
-
+{/* 
           {emptyRows > 0 && (
             <TableRow style={{ height: 53 * emptyRows }}>
               <StyledTableCell colSpan={columns.length} />
             </TableRow>
-          )}
+          )} */}
         </TableBody>
       </Table>
 
       <TablePagination
-        rowsPerPageOptions={[5, 10, 25]}
+        // rowsPerPageOptions={[ 10, 25]}
         component="div"
         count={Data?.length || 0}
         rowsPerPage={rowsPerPage}
