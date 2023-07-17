@@ -102,7 +102,7 @@ function ResponsiveAppBar() {
   const userId = useSelector((state) => state.user.id)
   useEffect(() => {
     socket.current?.emit('adduser', userId)
-   
+
 
 
   }, [userId])
@@ -116,15 +116,16 @@ function ResponsiveAppBar() {
         button: 'OK',
         dangerMode: true,
       }).then(() => {
-    logout()
+        logout()
       });
     })
+    logout()
   }, [])
 
 
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
- 
+
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
   };
@@ -253,7 +254,7 @@ function ResponsiveAppBar() {
               <NavLink to='/' style={{ color: '#2B3467', textDecoration: 'none' }}>
 
                 <h1>
-                H-tron
+                  H-tron
                 </h1>
               </NavLink>
             </Typography>
@@ -334,22 +335,22 @@ function ResponsiveAppBar() {
                   )) : ''
                 }
                 {isHosted ?
-                <>
-                  <MenuItem >
-                    <NavLink to='/reservation' style={{ color: 'black', textDecoration: 'none' }}>
+                  <>
+                    <MenuItem >
+                      <NavLink to='/reservation' style={{ color: 'black', textDecoration: 'none' }}>
 
-                      <Typography textAlign="center">Reservation</Typography>
-                    </NavLink>
-                  </MenuItem> 
-                  <MenuItem >
-                    <NavLink to='/viewhosted' style={{ color: 'black', textDecoration: 'none' }}>
+                        <Typography textAlign="center">Reservation</Typography>
+                      </NavLink>
+                    </MenuItem>
+                    <MenuItem >
+                      <NavLink to='/viewhosted' style={{ color: 'black', textDecoration: 'none' }}>
 
-                      <Typography textAlign="center">view vehicle</Typography>
-                    </NavLink>
-                  </MenuItem> 
-                  
-                  </>: ''}
-                  
+                        <Typography textAlign="center">view vehicle</Typography>
+                      </NavLink>
+                    </MenuItem>
+
+                  </> : ''}
+
                 {userId ?
                   <MenuItem >
                     <Typography textAlign="center" onClick={logout}>Logout</Typography>
