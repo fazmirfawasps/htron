@@ -111,7 +111,7 @@ export default function CustomizedTables({ Data }) {
       </Table>
 
       <TablePagination
-        // rowsPerPageOptions={[ 10, 25]}
+        rowsPerPageOptions={[ 10]}
         component="div"
         count={Data?.length || 0}
         rowsPerPage={rowsPerPage}
