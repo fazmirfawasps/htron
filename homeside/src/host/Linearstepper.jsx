@@ -1,6 +1,6 @@
 import Propertyimage from './Addimage';
 import AddpropertyType from './Addproperty';
-import React, { useState,  } from 'react'
+import React, { useState, } from 'react'
 import { Stepper, Step, StepLabel, Stack, Typography, Box } from '@mui/material'
 import useMediaQuery from '@mui/material/useMediaQuery'
 import BtnComponent from '../components/btncomponent';
@@ -8,7 +8,7 @@ import Propertydetail from './Propertydescription';
 import PropertyAvailable from './Propertyavaliabilty';
 import { useNavigate } from 'react-router-dom';
 import { useForm, FormProvider } from 'react-hook-form';
-import { Addproperty ,EditHostedProperty} from '../api/apicall';
+import { Addproperty, EditHostedProperty } from '../api/apicall';
 import { useSelector } from 'react-redux'
 import { ToastContainer, toast } from 'react-toastify';
 
@@ -19,40 +19,40 @@ import swal from 'sweetalert';
 
 
 
-function Findform({ activeStep , setValue,
+function Findform({ activeStep, setValue,
     // imgErr
 }) {
 
     switch (activeStep) {
         case 0:
-            return <AddpropertyType  setValue={setValue} />
+            return <AddpropertyType setValue={setValue} />
         case 1:
-            return <Propertydetail setValue={setValue}  />
+            return <Propertydetail setValue={setValue} />
         case 2:
-            return <PropertyAvailable setValue={setValue}  />
+            return <PropertyAvailable setValue={setValue} />
 
         case 3:
-            return < Propertyimage  setValue={setValue} />
-                 
+            return < Propertyimage setValue={setValue} />
+
         case 4:
             return (
                 <Typography variant="h3" m={10} textAlign={'center'}>
                     Form Filled successfully
                 </Typography>
             )
-        default :
+        default:
             return ''
     }
 
 }
 
-  
+
 export default function LinearStepper({ defaultData, isEdit }) {
     const userId = useSelector((state) => state.user.id)
     const { trigger, ...methods } = useForm({
         defaultValues: defaultData,
     })
-    
+
 
     const [activeStep, setActiveStep] = useState(0)
     // const [loading, setLoading] = useState(false)
@@ -82,7 +82,7 @@ export default function LinearStepper({ defaultData, isEdit }) {
     async function onSubmit(data) {
         if (activeStep < 3) {
             handleNext()
-        } else { 
+        } else {
             let isValid = await trigger()
             if (data.images.length !== 6) {
                 setimgErr(true)
@@ -98,25 +98,33 @@ export default function LinearStepper({ defaultData, isEdit }) {
                         dangerMode: true,
                     })
                         .then((willDelete) => {
-            
+
                             if (willDelete) {
                                 setActiveStep(activeStep + 1)
 
-                                EditHostedProperty(data,defaultData).then(() => {
-            
-                                    toast.success('Edit  succuesfully.', { autoClose: 500 })
-            
+                                EditHostedProperty(data, defaultData).then(() => {
+
+                                    toast(`edit success`, {
+                                        position: "top-center",
+                                        autoClose: 1000,
+                                        hideProgressBar: false,
+                                        closeOnClick: true,
+                                        pauseOnHover: true,
+                                        draggable: true,
+                                        progress: undefined,
+                                        theme: "light",
+                                    })
                                 }
-                                  )
-                                }
-                            })
-            
-                            
+                                )
+                            }
+                        })
+
+
                         .catch((err) => {
                             console.log(err);
                         })
-                  
-                
+
+
                 } else {
                     Addproperty(data, userId).then(() => {
                         // setLoading(false)
@@ -150,7 +158,7 @@ export default function LinearStepper({ defaultData, isEdit }) {
                 <form onSubmit={methods.handleSubmit(onSubmit)}>
                     <Findform
                         activeStep={activeStep}
-                        
+
                         setValue={methods.setValue}
                         imgErr={imgErr}
 
@@ -175,18 +183,31 @@ export default function LinearStepper({ defaultData, isEdit }) {
                                 content={'Back'}
                             />
                             <BtnComponent
-                                  variant={'contained'}
-                                  content={
-                                      activeStep == 3 ? 'Finish' : 'Next'
-                                  }
-                                  type={'submit'}
+                                variant={'contained'}
+                                content={
+                                    activeStep == 3 ? 'Finish' : 'Next'
+                                }
+                                type={'submit'}
                             />
                         </Stack>
                     )}
                 </form>
             </FormProvider>
             </>
-            <ToastContainer></ToastContainer>
+            <ToastContainer
+                position="top-center"
+                autoClose={1000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+                theme="light"
+            />
+
+
 
         </Box>
     )
