@@ -5,7 +5,6 @@
 // export default function MobNum({Changekey}){
  
 //     const [otp, setOtp] = useState('');
-//     console.log();
 
 //     return (
 //     <Container component="main" maxWidth="sm">

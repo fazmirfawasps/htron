@@ -89,9 +89,7 @@ export default function Home() {
       } catch (err) {
         alert(err);
       }
-    } else {
-      console.log('hj');
-    }
+    } 
   }
 
   async function removeFromWishlist(id) {

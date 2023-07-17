@@ -274,6 +274,8 @@ console.log(moneyperweek);
 
 const moneypToday= await adminHelpers.calculateTodayAmount()
 const totalmoney = await adminHelpers.getTotalBookingAmount()
+const totalperMonth =await adminHelpers.generateMonthlyReports()
+
 
 const data ={}   
 data.totalBookingPerDay = booking

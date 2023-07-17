@@ -1,13 +1,12 @@
 const db = require('../config/connection')
 const { ObjectId } = require('mongodb');
+const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
 module.exports = {
     addCategory: (cat, img) => {
 
         return new Promise((resolve, reject) => {
-            console.log(cat);
             db.get().collection('Category').insertOne({ Category: cat, image: img }).then((response) => {
-                console.log(response);
                 resolve(response)
             })
         })
@@ -28,7 +27,6 @@ module.exports = {
     },
     Editcategory: (id, cat) => {
         return new Promise((resolve, reject) => {
-            console.log('ibde');
             db.get().collection('Category').updateOne({ _id: new ObjectId(id) },
                 { $set: cat }).then((response) => {
                     resolve(response)
@@ -48,23 +46,17 @@ module.exports = {
 
 
             }).toArray()
-            console.log(user);
             resolve(user)
 
         })
     },
     blockUser: (action, id) => {
-        console.log(action + id);
-        console.log(action);
         const a = JSON.parse(action)
-        console.log(a);
-        console.log(!a);
         return new Promise((resolve, reject) => {
             db.get().collection('user').updateOne(
                 { _id: new ObjectId(id) },
                 { $set: { block: !a } }
             ).then((response) => {
-                console.log(response)
                 resolve()
             })
 
@@ -81,7 +73,6 @@ module.exports = {
                 { $inc: { Wallet: numericTotalPrice } }
               
             ).then((response) => {
-                console.log(response)
                 resolve()
             })
 
@@ -90,7 +81,6 @@ module.exports = {
     },
     GetAllProperty: () => {
 
-        console.log('whowwww');
         return new Promise((resolve, reject) => {
             db.get()
                 .collection('PropertyList')
@@ -114,11 +104,9 @@ module.exports = {
                 .toArray()
 
                 .then((response) => {
-                    console.log(response);
                     resolve(response);
                 })
                 .catch((error) => {
-                    console.error('Error querying MongoDB:', error);
                     reject(error);
                 });
         })
@@ -126,7 +114,6 @@ module.exports = {
     },
     GetAllHostdetail: () => {
 
-        console.log('whowwww');
         return new Promise((resolve, reject) => {
             db.get()
                 .collection('HostDetails')
@@ -143,18 +130,15 @@ module.exports = {
                 .toArray()
 
                 .then((response) => {
-                    console.log(response);
                     resolve(response);
                 })
                 .catch((error) => {
-                    console.error('Error querying MongoDB:', error);
                     reject(error);
                 });
         })
 
     },
     GetAhostDetail: ({ id }) => {
-        console.log(id)
 
 
 
@@ -164,11 +148,9 @@ module.exports = {
                 .find({ _id: new ObjectId(id) })
                 .toArray()
                 .then((response) => {
-                    console.log(response);
                     resolve(response);
                 })
                 .catch((error) => {
-                    console.error('Error querying MongoDB:', error);
                     reject(error);
                 });
         })
@@ -180,12 +162,10 @@ module.exports = {
                 { _id: new ObjectId(id) },
                 { $set: { Verified: true } }
             ).then((response) => {
-                console.log(response);
                 db.get().collection('user').updateOne(
                     { _id: new ObjectId(hostid) },
                     { $set: { Verified: true } }
                 ).then((response) => {
-                    console.log(response)
                     resolve()
                 })
             })
@@ -223,14 +203,11 @@ module.exports = {
                 { $sort: { _id: 1 } },
                 { $limit: 4 },
             ]).toArray()
-            console.log(result)
             if(result.length==0){
-                console.log('ivdyaano');
 
                 resolve(0)
             }
             else{
-                console.log('ivdyaano');
                 
 
                 resolve( result)
@@ -242,14 +219,11 @@ module.exports = {
     totalNumberOfProperty: () => {
         return new Promise(async (resolve, reject) => {
             const result = await db.get().collection('PropertyList').countDocuments({})
-            console.log(result);
             if(result.length==0){
-                console.log('ivdyaano');
 
                 resolve(0)
             }
             else{
-                console.log('ivdyaano');
                 
 
                 resolve(result)
@@ -270,15 +244,11 @@ module.exports = {
                 { $group: { _id: 0, weeklyAmount: { $sum:  { $toInt: "$totalprice" } } } },
                 { $project: { weeklyAmount: 1, _id: 0 } },
             ]).toArray()
-            console.log('nthu patti');
-            console.log(result);
             if(result.length==0){
-                console.log('ivdyaano');
 
                 resolve(0)
             }
             else{
-                console.log('ivdyaano');
                 
 
                 resolve(result[0].weeklyAmount)
@@ -317,9 +287,7 @@ module.exports = {
                         }
                     ])
                     .toArray()
-                    console.log('totalamount');
-
-                    console.log(result);
+                    
                     if(result.length ==0){
                         resolve(0);
 
@@ -328,10 +296,8 @@ module.exports = {
                         resolve(result[0].totalAmount)
                     }
 
-                // console.log(result[0].totalAmount)
 
-                console.log('cecf');
-                // console.log(result[0].totalAmount)
+        
             } catch (error) {
                 reject(error);
             }
@@ -357,15 +323,12 @@ module.exports = {
                 }
               ])
               .toArray();
-              console.log(result);
       
             if(result.length==0){
-                console.log('ivdyaano');
 
                 resolve(0)
             }
             else{
-                console.log('ivdyaano');
                 
 
                 resolve(result[0].totalAmount)
@@ -391,13 +354,31 @@ removeProperty: (id) => {
                   };
                 db.get().collection('WishList').updateMany(filter, update).then(()=>{
                     resolve(respone)
-                    console.log('delered wishlist from ');
 
                 })
 
-                console.log(respone);
             })
     }
     )
-}
+},
+generateMonthlyReports : () => {
+    return Promise.all(months.map((month, index) => {
+      const startDate = new Date(`2023-${index + 1}-01`);
+      const endDate = new Date(`2023-${index + 2}-01`);
+  
+      return new Promise((resolve) => {
+        db.get().collection('Booking').aggregate([
+          { $match: { createdAt: { $gte: startDate, $lt: endDate } } },
+          { $group: { _id: null, count: { $sum: 1 } } },
+        ]).toArray()
+          .then((result) => {
+            const totalBookings = result.length > 0 ? result[0].count : 0;
+            resolve({ month, totalBookings });
+          })
+          .catch((error) => {
+            resolve({ month, error });
+          });
+      });
+    }));
+  }
 }

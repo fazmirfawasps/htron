@@ -27,7 +27,7 @@ const Booking = () => {
             .then((willDelete) => {
 
                 if (willDelete) {
-                    console.log('working');
+                    // console.log('working');
                     api.patch(`/admin/Cancelbooking/${hostid}/${price}/${orderid}`).then(() => {
                         setChange(!change)
                     })
