@@ -67,7 +67,9 @@ function BookingPage() {
                     }}
                     content={'Canel'}
                     style={style}
-                />
+                />,
+                OrderStatus:checkoutDate<today ?'Booked':item.OrderStatus
+                
 
             })})
            
