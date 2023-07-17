@@ -121,14 +121,14 @@ const Dashboard = () => {
         </Grid>
         <Box width='auto' height={250} />
         <Grid item xs={12} lg={6}>
-          <Box width={isMobile ? 300 : 500} p={1}>
+          <Box width={isMobile ? 400 : 500} p={1}>
             <BarChart
               chartData={totalBookingperMonth}
             />
           </Box>
         </Grid>
         <Grid item xs={12}  lg={6}>
-          <Box width={isMobile ? 300 : 500} p={1}>
+          <Box width={isMobile ? 400 : 500} p={1}>
             <GraphChart
               chartData={totalBooking}
             />
