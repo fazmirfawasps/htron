@@ -43,10 +43,24 @@ function BookingPage() {
     }
     useEffect(() => {
         getUserOrders(userid).then(({ data }) => {
-            const datas = data.map((item) => ({
+            const datas = data.map((item) =>  { 
+
+                const checkoutDateParts = item.Checkout.split('-');
+                // const checkinDate = new Date(
+                //   checkinDateParts[2],
+                //   checkinDateParts[1] - 1,
+                //   checkinDateParts[0]
+                // );
+                const checkoutDate = new Date(
+                    checkoutDateParts[2],
+                    checkoutDateParts[1] - 1,
+                    checkoutDateParts[0]
+                  );
+
+                return({
                 ...item,
                 Image: <img src={`http://htron.site/api/images/${item.Image}`} style={{ width: '50px' }}></img>,
-                Action: item.OrderStatus == "Booking Cancelled" || item.OrderStatus === "Refunded" ? "" : <BtnComponent
+                Action: item.OrderStatus == "Booking Cancelled" || item.OrderStatus === "Refunded"||item.Checkout<today ? "" : <BtnComponent
                     variant={'contained'}
                     callback={() => {
                         Cancel(item._id)
@@ -55,7 +69,7 @@ function BookingPage() {
                     style={style}
                 />
 
-            }))
+            })})
            
            
 
