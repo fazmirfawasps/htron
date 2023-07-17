@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import * as React from 'react';
 import PropTypes from 'prop-types';
 import Tabs from '@mui/material/Tabs';
@@ -150,10 +149,39 @@ export default function BasicTabs() {
 
             }
               ))
+              const allorder = datas.map((item) =>  { 
+
+                const checkoutDateParts = item.Checkout.split('-');
+                // const checkinDate = new Date(
+                //   checkinDateParts[2],
+                //   checkinDateParts[1] - 1,
+                //   checkinDateParts[0]
+                // );
+                const checkoutDate = new Date(
+                    checkoutDateParts[2],
+                    checkoutDateParts[1] - 1,
+                    checkoutDateParts[0]
+                  );
+
+                return({
+                ...item,
+                Image: <img src={`http://htron.site/api/images/${item.Image}`} style={{ width: '50px' }}></img>,
+                Action: item.OrderStatus == "Booking Cancelled" || item.OrderStatus === "Refunded"||checkoutDate<today ? "" : <BtnComponent
+                    variant={'contained'}
+                    callback={() => {
+                        Cancel(item._id)
+                    }}
+                    content={'Canel'}
+                    style={style}
+                />,
+                OrderStatus:checkoutDate<today && item.OrderStatus == "Booking pending"  ?'Booked':item.OrderStatus
+                
+
+            })})
             
             setTodayorder(tod)
             setUpcomeorder(Upcoming)
-            setOrder(datas)
+            setOrder(allorder)
             setPastOrder(Pastorder)
         })
     }, [change])
@@ -170,7 +198,7 @@ export default function BasicTabs() {
                         <Tab label="Past" {...a11yProps(0)} />
                         <Tab label="Today" {...a11yProps(1)} />
                         <Tab label="Upcoming" {...a11yProps(2)} />
-                        {/* <Tab label="All" {...a11yProps(3)} /> */}
+                        <Tab label="All" {...a11yProps(3)} />
 
                     </Tabs>
                 </Box>
@@ -186,9 +214,9 @@ export default function BasicTabs() {
                     <TableComponent Data={upcomeOrders}></TableComponent>
 
                 </TabPanel>
-                {/* <TabPanel value={value} index={3}>
+                <TabPanel value={value} index={3}>
                     <TableComponent Data={order}></TableComponent>
-                </TabPanel> */}
+                </TabPanel>
             </Box>
         </Box>
     );

@@ -68,7 +68,7 @@ function BookingPage() {
                     content={'Canel'}
                     style={style}
                 />,
-                OrderStatus:checkoutDate<today ?'Booked':item.OrderStatus
+                OrderStatus:checkoutDate<today && item.OrderStatus == "Booking pending"  ?'Booked':item.OrderStatus
                 
 
             })})
