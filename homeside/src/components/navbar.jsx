@@ -119,7 +119,6 @@ function ResponsiveAppBar() {
         logout()
       });
     })
-    logout()
   }, [])
 
 
