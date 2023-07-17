@@ -61,7 +61,7 @@ export default function CustomizedTables({ Data }) {
   const columns = Object.keys(Data?.[0] || {});
 
   return (
-    <TableContainer component={Paper} sx={{ marginTop: 10 }}>
+    <TableContainer component={Paper} >
       <Table sx={{ minWidth: 700 }} aria-label="customized table">
         <TableHead>
           <TableRow>
