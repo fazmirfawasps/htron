@@ -10,8 +10,7 @@ import io from 'socket.io-client'
 const About = () => {
     const socket = useRef()
     useEffect(() => {
-        socket.current = io('https://htron.site', { path: '/api/socket.io/' })
-
+        socket.current = io('http://localhost:7000')
       }, [])
 
     const [user, setUser] = useState([])
@@ -19,11 +18,11 @@ const About = () => {
     const handleChange = useCallback(() => {
         console.log('NADAKND');
         setChange(prevChange => !prevChange);
-        socket.current.emit('block', {
+        // socket.current.emit('block', {
             
-            text: 'blocking on',
+        //     text: 'blocking on',
       
-          })
+        //   })
     }, []);
     const [users, setUsersearch] = useState([])
     const Block =(userid)=>{

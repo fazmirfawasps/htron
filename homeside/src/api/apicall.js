@@ -2,7 +2,6 @@ import api from "../axios/axios";
 
 
 export function Addproperty(data, id) {
-    console.log('working ui add');
     const formData = new FormData()
     formData.append('hostid', id)
     formData.append('PropertyName', data['PropertyName'])

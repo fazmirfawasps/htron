@@ -34,6 +34,7 @@ module.exports = function(server) {
       console.log('messahe working');
       console.log(text);
       console.log(receiverid);
+      console.log(name);
       console.log('ivdeyo aano presnm id');
       const receiver = getReceiver(receiverid)
       console.log(receiver);

@@ -3,12 +3,17 @@ import ReactSwitch from 'react-switch'
 import api from '../axios/axios';
 
 
-function ToggleSwitch({data,userId,handle},change) {
+
+
+function ToggleSwitch({data,userId,handle,Block},change) {
     useEffect(()=>{
 
     },[change])
 
   const handleChange = () => {
+    if(!data){
+    Block(userId)
+  }
     api.get('/admin/block',{
         params:{
             user:userId,
